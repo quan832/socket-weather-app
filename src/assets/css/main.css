@@ -11280,11 +11280,10 @@ ol ol li {
 .day-wethear-item {
   float: left;
   padding: 25px 0 20px;
-  border-right: 1px solid #e6ecf5;
+  border: 1px solid #e6ecf5;
   text-align: center;
   width: 16.5%; }
-  .day-wethear-item:last-child {
-    border-right: none; }
+ 
   .day-wethear-item .title {
     font-size: 12px;
     font-weight: 700;

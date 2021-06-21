@@ -26,6 +26,8 @@ import makeToast from "./Toaster";
 export const history = createBrowserHistory();
 
 function App() {
+  
+
   const [socket, setSocket] = React.useState(null);
 
   // const SocketContext = React.createContext(setupSocket);
@@ -66,7 +68,6 @@ function App() {
   };
 
   useEffect(() => {
-    debugger;
     setupSocket();
   }, []);
 

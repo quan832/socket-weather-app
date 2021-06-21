@@ -2,13 +2,7 @@ const mongoose = require("mongoose");
 const Weather = mongoose.model("Weather");
 
 exports.createCityWeather = async (req, res) => {
-  const {
-    cityName,
-    avrTemperature,
-    highTemperature,
-    lowTemperature,
-    typeIcon,
-  } = req.body;
+  const { cityName, avrTemperature, typeIcon, data } = req.body;
 
   const cityNameRegex = /^[A-Za-z\s]+$/;
 
@@ -21,7 +15,9 @@ exports.createCityWeather = async (req, res) => {
 
   const weatherCity = new Weather({
     cityName,
-    comment,
+    avrTemperature,
+    typeIcon,
+    data,
   });
 
   await weatherCity.save();

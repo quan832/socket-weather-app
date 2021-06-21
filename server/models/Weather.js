@@ -8,26 +8,35 @@ var weatherSchema = mongoose.Schema({
   },
   dateTime: {
     type: Date,
-  },
-  rainFall: {
-    type: Number,
-    required: "rainFall is required!!",
+    default: Date.now,
   },
   avrTemperature: {
     type: Number,
     required: "avrTemperature is required!!",
   },
-  highTemperature: {
-    type: Number,
-    required: "highTemperature is required!!",
-  },
-  lowTemperature: {
-    type: Number,
-    required: "lowTemperature is required!!",
-  },
   typeIcon: {
     type: String,
   },
+  data: [
+    {
+      dateNumber: { type: Date },
+      rainFall: {
+        type: Number,
+      },
+      wingSpeed: {
+        type: Number,
+      },
+      highTemperature: {
+        type: Number,
+      },
+      lowTemperature: {
+        type: Number,
+      },
+      avrTemperature: {
+        type: Number,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("Weather", weatherSchema);

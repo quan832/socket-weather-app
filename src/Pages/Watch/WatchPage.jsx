@@ -11,7 +11,7 @@ import axios from "axios";
 
 export default function WatchPage(props) {
   const [allWeathers, setallWeathers] = useState([]);
-  
+
   const getAllWeathers = () => {
     axios
       .get("http://localhost:8000/weather", {
@@ -37,9 +37,11 @@ export default function WatchPage(props) {
     <div>
       <div>
         {/* Header-BP */}
-        <Header />
-        {/* ... end Header-BP */}
 
+        <Header />
+
+        {/* ... end Header-BP */}
+        <div class="header-spacer header-spacer-small"></div>
         {/* Main Header Weather */}
         <Carousel />
         {/* ... end Main Header Weather */}

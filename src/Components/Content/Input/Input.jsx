@@ -1,6 +1,17 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { FETCH_ALL_WEATHERS } from "../../../util/appUtil";
 
 export default function Input() {
+  const dispatch = useDispatch();
+
+  const fetchWeather = () => {
+    // call action
+    dispatch({ type: FETCH_ALL_WEATHERS });
+  };
+
+
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -12,44 +23,40 @@ export default function Input() {
           <div className="row">
             <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
               <fieldset className="form-group label-floating is-select">
-                <label className="control-label">Country and Timezone</label>
-                <select className="selectpicker form-control">
-                  <option value="AL">United States (UTC-8)</option>
-                  <option value={2}>Ontario (UTC−6)</option>
-                  <option value="WY">Alberta (UTC−6)</option>
-                </select>
-              </fieldset>
-              <fieldset className="form-group label-floating is-select">
                 <label className="control-label">Extended Forecast Days</label>
-                <select className="selectpicker form-control">
+                <select
+                  className="selectpicker form-control"
+                  style={{ paddingTop: "40px" }}
+                >
                   <option value="AL">Show Next 7 days</option>
                   <option value={2}>Show Next 10 days</option>
                   <option value="WY">Show Next 14 days</option>
                 </select>
               </fieldset>
+
               <a href="#" className="btn btn-secondary btn-md full-width">
                 Restore all Attributes
               </a>
             </div>
             <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
-              <fieldset className="form-group label-floating is-select">
-                <label className="control-label">Temperature Unit</label>
-                <select className="selectpicker form-control">
-                  <option value="AL">F° (Farenheit)</option>
-                  <option value={2}>C° (Celsius)</option>
-                </select>
-              </fieldset>
-              <div className="switcher-block">
-                <div className="h6 title">Show Extended Forecast on Widget</div>
+              <div className="switcher-block" style={{ marginTop: "15px" }}>
+                <div className="h6 title">Show all City forecast on Widget</div>
                 <div className="togglebutton blue">
                   <label>
                     <input type="checkbox" defaultChecked />
+                    <span className="toggle" />
                   </label>
                 </div>
               </div>
-              <a href="#" className="btn btn-blue btn-md full-width">
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  fetchWeather();
+                }}
+                className="btn btn-blue btn-md full-width"
+              >
                 Save all Changes
-              </a>
+              </button>
             </div>
           </div>
         </form>

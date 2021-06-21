@@ -1,6 +1,6 @@
 import React from "react";
 import ThreeDot from "../../../assets/svg-icons/three-dots-icon.svg?component";
-import SunnyIcon from "../../../assets/svg-icons/sprites/icons-weather.svg?component";
+import CloudyIcon from "../../../assets/svg-icons/sprites/icons-weather-cloudy.svg?component";
 export default function Preview() {
   return (
     <div className="ui-block">
@@ -18,7 +18,7 @@ export default function Preview() {
             <span>58°</span>
             <span>76°</span>
           </div>
-          <SunnyIcon />
+          <CloudyIcon />
         </div>
         <div className="wethear-now-description">
           <div className="climate">Partly Sunny</div>

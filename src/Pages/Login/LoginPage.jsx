@@ -33,7 +33,6 @@ function LoginPage(props) {
         localStorage.setItem(APP_TOKEN, res.data.token);
         props.history.push("/dashboard");
         props.setupSocket();
-        debugger
       })
       .catch((err) => console.log(err));
   };
