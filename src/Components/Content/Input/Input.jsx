@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { FETCH_ALL_WEATHERS } from "../../../util/appUtil";
+import { APP_TOKEN, FETCH_ALL_WEATHERS } from "../../../util/appUtil";
 
-export default function Input() {
+export default function Input({ socket }) {
   const dispatch = useDispatch();
 
   const fetchWeather = () => {
@@ -11,7 +11,27 @@ export default function Input() {
     dispatch({ type: FETCH_ALL_WEATHERS });
   };
 
+  const [button, setButton] = useState(false);
+  const [allWeather, setAllWeather] = [];
+  const [userId, setUserId] = React.useState("");
 
+  useEffect(() => {
+    console.log(socket);
+    const token = localStorage.getItem(APP_TOKEN);
+
+    if (socket || button === true) {
+
+      socket.emit("getAllWeather", { token });
+
+      socket.on("newAllWeathers", (message) => {
+        console.log(message);
+        debugger;
+      });
+    }
+  }, [button]);
+
+  console.log(allWeather);
+  console.log(button);
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -51,7 +71,8 @@ export default function Input() {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  fetchWeather();
+                  // fetchWeather();
+                  setButton(!button);
                 }}
                 className="btn btn-blue btn-md full-width"
               >

@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { weatherOptions } from "../../../util/appUtil";
+import { APP_TOKEN, weatherOptions } from "../../../util/appUtil";
 
-export default function ExtendedForecast() {
+export default function ExtendedForecast({ match, socket }) {
   // data
   const { isFetching, weathers } = useSelector((state) => state.weatherState);
 
@@ -17,7 +17,17 @@ export default function ExtendedForecast() {
           data-mh="wethear-item"
         >
           <div className="title">{item.cityName}</div>
-          <img src={`../../../assets/img/weather/icon-${item.typeIcon}`} />
+          <div
+            style={{ width: "125px", height: "125px", objectFit: "contain" }}
+          >
+            <svg
+              style={{ width: "100%" }}
+              src={
+                window.location.origin +
+                `/src/assets/svg-icons/sprites/icons-weather-${item.typeIcon}.png`
+              }
+            />
+          </div>
           <div className="wethear-now">
             <div className="temperature-sensor">60°</div>
             <div className="max-min-temperature">

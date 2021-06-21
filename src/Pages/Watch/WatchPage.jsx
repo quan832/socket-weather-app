@@ -47,7 +47,7 @@ export default function WatchPage(props) {
         {/* ... end Main Header Weather */}
 
         {/* Widget Weather */}
-        <MainContent />
+        <MainContent socket={props.socket} />
         {/* ... end Widget Weather */}
         <a className="back-to-top" href="#">
           <img

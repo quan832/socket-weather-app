@@ -35,3 +35,9 @@ exports.getAllWeather = async (req, res) => {
 
   res.json(weathers);
 };
+
+exports.getYourCityWeather = async (req, res) => {
+  const weathers = await Weather.findById(req.params.id);
+  
+  res.json(weathers);
+};

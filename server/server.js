@@ -28,9 +28,11 @@ const server = app.listen(8000, () => {
 
 const io = require("socket.io")(server);
 const jwt = require("jwt-then");
+const { default: axios } = require("axios");
 
 // const Message = mongoose.model("Message");
 const User = mongoose.model("User");
+const Weather = mongoose.model("Weather");
 
 io.use(async (socket, next) => {
   try {
@@ -50,20 +52,19 @@ io.on("connection", (socket) => {
     console.log("Disconnected: " + socket.userId);
   });
 
-  // socket.on("chatroomMessage", async ({ chatroomId, message }) => {
-  //   if (message.trim().length > 0) {
-  //     const user = await User.findOne({ _id: socket.userId });
-  //     const newMessage = new Message({
-  //       chatroom: chatroomId,
-  //       user: socket.userId,
-  //       message,
-  //     });
-  //     io.to(chatroomId).emit("newMessage", {
-  //       message,
-  //       name: user.name,
-  //       userId: socket.userId,
-  //     });
-  //     await newMessage.save();
-  //   }
-  // });
+  socket.on("getAllWeather", async ({ token }) => {
+    console.log("A user want to get weather: " + socket.userId);
+
+    // wether
+    const data = await Weather.find({});
+
+    socket.emit("newAllWeathers", {
+      data,
+      userId: socket.userId,
+    });
+    // io.to().emit("allWeather", {
+    //   weatherCity,
+    //   userId: socket.userId,
+    // });
+  });
 });

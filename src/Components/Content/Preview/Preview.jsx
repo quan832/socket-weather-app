@@ -1,6 +1,6 @@
 import React from "react";
 import ThreeDot from "../../../assets/svg-icons/three-dots-icon.svg?component";
-import CloudyIcon from "../../../assets/svg-icons/sprites/icons-weather-cloudy.svg?component";
+import CloudyIcon from "../../../assets/svg-icons/sprites/icons-weather-sunny.svg?component";
 export default function Preview() {
   return (
     <div className="ui-block">
