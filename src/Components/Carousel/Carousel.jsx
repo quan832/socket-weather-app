@@ -1,14 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import weatherBottom from "../../assets/img/weather-bottom.png";
 import WeatherRefresh from "../../assets/svg-icons/weather-refresh-icon.svg?component";
 
 export default function Carousel() {
+
+  const cityWeather = useSelector( state=> state.weatherState.cityWeather );
+
   return (
     <div className="main-header main-header-weather">
       <div className="content-bg-wrap bg-weather" />
       <div className="date-and-place">
         <div className="date">Saturday, March 26th</div>
-        <div className="place">San Francisco, CA</div>
+        <div className="place">{cityWeather.cityName}</div>
       </div>
       <div className="wethear-update">
         Updated: 20/10 6:32pm
@@ -22,10 +26,10 @@ export default function Carousel() {
                 <svg className="olymp-weather-partly-sunny-icon icon">
                   <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-partly-sunny-icon" />
                 </svg>
-                <div className="temperature-sensor">64°F</div>
+                <div className="temperature-sensor">{cityWeather.avrTemperature}°C</div>
                 <div className="max-min-temperature">
-                  <span>Low: 58°</span>
-                  <span>High: 76°</span>
+                  <span>Low: {cityWeather.lowTemperature}°</span>
+                  <span>High: {cityWeather.highTemperature}°</span>
                 </div>
               </div>
               <div className="climate">Partly Sunny</div>
@@ -35,21 +39,21 @@ export default function Carousel() {
                     <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-thermometer-icon" />
                   </svg>
                   <div>Real Feel</div>
-                  <span>67°</span>
+                  <span>{cityWeather.feelTemperature}°</span>
                 </div>
                 <div>
                   <svg className="olymp-weather-rain-drops-icon icon">
                     <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-rain-drops-icon" />
                   </svg>
                   <div>Chance of Rain</div>
-                  <span>5%</span>
+                  <span>{cityWeather.rainChance}%</span>
                 </div>
                 <div>
                   <svg className="olymp-weather-wind-icon-header icon">
                     <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-wind-icon-header" />
                   </svg>
                   <div>Wind Speed</div>
-                  <span>20MPH</span>
+                  <span>{cityWeather.windSpeed}MPH</span>
                 </div>
               </div>
             </div>

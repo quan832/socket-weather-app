@@ -6,42 +6,43 @@ import Header from "../../Components/Header/Header";
 import MainContent from "../../Components/Content/MainContent";
 
 // utils
-import { APP_TOKEN } from "../../util/appUtil";
-import axios from "axios";
+// import { APP_TOKEN } from "../../util/appUtil";
+// import axios from "axios";
 
 export default function WatchPage(props) {
-  const [allWeathers, setallWeathers] = useState([]);
 
-  const getAllWeathers = () => {
-    axios
-      .get("http://localhost:8000/weather", {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem(APP_TOKEN),
-        },
-      })
-      .then((response) => {
-        setallWeathers(response.data);
-      })
-      .catch((err) => {
-        setTimeout(getAllWeathers, 5000);
-      });
-  };
+  // const [allWeathers, setAllWeathers] = useState([]);
 
-  useEffect(() => {
-    getAllWeathers();
-  }, []);
+  // const getAllWeathers = () => {
+  //   axios
+  //     .get("http://localhost:8000/weather", {
+  //       headers: {
+  //         Authorization: "Bearer " + localStorage.getItem(APP_TOKEN),
+  //       },
+  //     })
+  //     .then((response) => {
+  //       setAllWeathers(response.data);
+  //     })
+  //     .catch((err) => {
+  //       setTimeout(getAllWeathers, 5000);
+  //     });
+  // };
 
-  console.log(allWeathers);
+  // useEffect(() => {
+  //   getAllWeathers();
+  // }, []);
+
+  // console.log(allWeathers);
 
   return (
     <div>
       <div>
         {/* Header-BP */}
 
-        <Header />
+        <Header socket={props.socket} />
 
         {/* ... end Header-BP */}
-        <div class="header-spacer header-spacer-small"></div>
+        <div className="header-spacer header-spacer-small"></div>
         {/* Main Header Weather */}
         <Carousel />
         {/* ... end Main Header Weather */}

@@ -6,12 +6,11 @@ export default function ExtendedForecast({ match, socket }) {
   // data
   const { isFetching, weathers } = useSelector((state) => state.weatherState);
 
-  const renderSVGItem = (item) => {};
-
   const renderDayWeatherItem = () => {
     return weathers.map((item, index) => {
       return (
-        <div
+        <div 
+          key={index}
           className="day-wethear-item"
           style={{ borderRight: "1px solid #e6ecf5" }}
           data-mh="wethear-item"

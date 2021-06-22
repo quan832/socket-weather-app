@@ -62,9 +62,25 @@ io.on("connection", (socket) => {
       data,
       userId: socket.userId,
     });
-    // io.to().emit("allWeather", {
-    //   weatherCity,
-    //   userId: socket.userId,
-    // });
   });
+
+  socket.on("getCityWeather", async ( weatherName )=>{
+
+    console.log(`A user want to get ${weatherName} weather: ` + socket.userId);
+
+    //get city weather 
+    const data = await Weather.findOne({cityName: new RegExp('^'+weatherName+'$', "i")}, function(err, doc){
+        if(err) {
+          return err;
+        }
+    });
+
+    console.log(data)
+
+    socket.emit("newCityWeather", {
+      data,
+      userId: socket.userId,
+    });
+  })
+
 });

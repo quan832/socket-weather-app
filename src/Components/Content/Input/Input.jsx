@@ -1,37 +1,17 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { APP_TOKEN, FETCH_ALL_WEATHERS } from "../../../util/appUtil";
+import { APP_TOKEN, CLICK_BUTTON, FETCH_ALL_WEATHERS } from "../../../util/appUtil";
 
 export default function Input({ socket }) {
+
   const dispatch = useDispatch();
 
   const fetchWeather = () => {
     // call action
-    dispatch({ type: FETCH_ALL_WEATHERS });
+    dispatch({ type: CLICK_BUTTON });
   };
 
-  const [button, setButton] = useState(false);
-  const [allWeather, setAllWeather] = [];
-  const [userId, setUserId] = React.useState("");
-
-  useEffect(() => {
-    console.log(socket);
-    const token = localStorage.getItem(APP_TOKEN);
-
-    if (socket || button === true) {
-
-      socket.emit("getAllWeather", { token });
-
-      socket.on("newAllWeathers", (message) => {
-        console.log(message);
-        debugger;
-      });
-    }
-  }, [button]);
-
-  console.log(allWeather);
-  console.log(button);
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -72,7 +52,8 @@ export default function Input({ socket }) {
                 onClick={(e) => {
                   e.preventDefault();
                   // fetchWeather();
-                  setButton(!button);
+                  // setButton(!button);
+                  fetchWeather();
                 }}
                 className="btn btn-blue btn-md full-width"
               >

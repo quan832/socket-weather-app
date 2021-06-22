@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import FindWeather from "../../assets/svg-icons/magnifying-glass-icon.svg?component";
+import {  FETCH_CITY_WEATHER } from "../../util/appUtil";
 
-export default function Header() {
+
+export default function Header({socket}) {
+
+  const [ citySearch, setCitySearch ] = useState('');
+
+  const [submit, setSubmit] = useState(false);
+
+  const dispatch = useDispatch()
+  const cityRef = React.createRef(); 
+
+  useEffect(()=>{
+
+    if (socket && submit) {
+    
+      const weather = cityRef.current.value;
+      socket.emit("getCityWeather",  weather);
+
+      socket.on("newCityWeather", ({data,userId}) => {
+          return dispatch({type: FETCH_CITY_WEATHER ,payload: data})
+      }); 
+      
+    }
+    
+  },[submit])
+
   return (
     <header className="header" id="site-header">
       <div className="page-title">
@@ -14,8 +40,12 @@ export default function Header() {
               className="form-control js-user-search"
               placeholder="Search here people or pages..."
               type="text"
+              ref={cityRef}
             />
-            <button>
+            <button onClick={(e)=>{
+              e.preventDefault();
+              setSubmit(!submit);
+            }}>
               <FindWeather />
             </button>
           </div>

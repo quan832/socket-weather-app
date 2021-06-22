@@ -18,7 +18,7 @@ import IndexPage from "./Pages/Index/IndexPage";
 
 // import socket libary io
 import io from "socket.io-client";
-import { APP_TOKEN } from "./util/appUtil";
+import { APP_TOKEN, defaultCity } from "./util/appUtil";
 
 // import makeToast
 import makeToast from "./Toaster";
@@ -29,10 +29,10 @@ function App() {
   
 
   const [socket, setSocket] = React.useState(null);
-
+  
   // const SocketContext = React.createContext(setupSocket);
 
-  const setupSocket = () => {
+  const setupSocket = async () => {
     const token = localStorage.getItem(APP_TOKEN);
 
     if (token && !socket) {
@@ -56,7 +56,7 @@ function App() {
       });
 
       // if connect
-      newSocket.on("connect", () => {
+      await newSocket.on("connect", () => {
         console.log("connected");
         makeToast("success", "Socket Connected!");
       });
