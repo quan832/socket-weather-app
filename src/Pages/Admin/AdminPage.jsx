@@ -8,7 +8,7 @@ import CreateForecast from "../../admin/CreateForecast/CreateForecast";
 import ListForecast from "../../admin/List/ListForecast";
 import ModalUpdate from "../../admin/Modal/ModalUpdate";
 
-export default function AdminPage({ socket }) {
+export default function AdminPage({ setupSocket, socket }) {
   return (
     <div>
       <HeaderAdmin />
@@ -57,7 +57,7 @@ export default function AdminPage({ socket }) {
       {/* Tab panes */}
       <div className="tab-content">
         <CreateForecast />
-        <ListForecast socket={socket} />
+        <ListForecast socket={socket} setupSocket={setupSocket} />
       </div>
       {/* Window-popup Create Event */}
       <Modal socket={socket} name={"create"} />

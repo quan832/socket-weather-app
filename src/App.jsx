@@ -19,12 +19,13 @@ import AdminPage from "./Pages/Admin/AdminPage";
 
 // import socket libary io
 import io from "socket.io-client";
-import { APP_TOKEN, defaultCity } from "./util/appUtil";
+import { APP_TOKEN, defaultCity, FETCH_ALL_WEATHERS } from "./util/appUtil";
 
 // import makeToast
 import makeToast from "./Toaster";
 
 import "./index.css";
+import { useDispatch } from "react-redux";
 // alert
 // import Swal from "sweetalert2";
 
@@ -32,7 +33,7 @@ export const history = createBrowserHistory();
 
 function App() {
   const [socket, setSocket] = React.useState(null);
-
+  const dispatch = useDispatch();
   // const SocketContext = React.createContext(setupSocket);
 
   const setupSocket = async () => {
@@ -65,8 +66,12 @@ function App() {
         makeToast("success", "Socket Connected!");
       });
 
-      setSocket(newSocket);
+      newSocket.on("listenCityWeather", (weather) => {
+        dispatch({ type: FETCH_ALL_WEATHERS, payload: weather });
+        makeToast("success", "Weather have updated");
+      });
 
+      setSocket(newSocket);
     }
   };
 
@@ -91,7 +96,7 @@ function App() {
         <Route
           path="/admin"
           exact
-          render={() => <AdminPage socket={socket} />}
+          render={() => <AdminPage socket={socket} setupSocket={setupSocket} />}
         />
       </Switch>
     </BrowserRouter>

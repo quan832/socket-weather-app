@@ -12,7 +12,7 @@ import friendHarmonic2 from "../../assets/img/friend-harmonic2.jpg";
 
 import ModalUpdate from "../Modal/ModalUpdate";
 
-export default function ListForecast({ socket }) {
+export default function ListForecast({ setupSocket, socket }) {
   const weathers = useSelector((state) => state.weatherState.weathers);
 
   const renderWeather = () => {
@@ -99,7 +99,12 @@ export default function ListForecast({ socket }) {
               </a>
             </td>
           </tr>
-          <ModalUpdate socket={socket} name={`update`} item={item} />
+          <ModalUpdate
+            setupSocket={setupSocket}
+            socket={socket}
+            name={`update`}
+            item={item}
+          />
         </Fragment>
       );
     });

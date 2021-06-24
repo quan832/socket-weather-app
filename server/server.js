@@ -62,25 +62,26 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("getCityWeather", async ( weatherName )=>{
-
+  socket.on("getCityWeather", async (weatherName) => {
     console.log(`A user want to get ${weatherName} weather: ` + socket.userId);
 
-    //get city weather 
-    const data = await Weather.findOne({cityName: new RegExp('^'+weatherName+'$', "i")}, function(err, doc){
-       return err
-    });
-    
+    //get city weather
+    const data = await Weather.findOne(
+      { cityName: new RegExp("^" + weatherName + "$", "i") },
+      function (err, doc) {
+        return err;
+      }
+    );
+
     socket.emit("newCityWeather", {
       data,
       userId: socket.userId,
     });
-  })
+  });
 
-  socket.on("createCityWeather", async (weather) =>{
+  socket.on("createCityWeather", async (weather) => {
+    console.log(`A user create new city weather `);
 
-    console.log(`A user create new city weather `)
-    
     // wether
     const data = await Weather.find({});
 
@@ -88,5 +89,17 @@ io.on("connection", (socket) => {
       data,
       userId: socket.userId,
     });
-  })
+  });
+
+  socket.on("updateCityWeather", async (weather) => {
+    console.log(`A user update new city weather `);
+
+    // wether
+    const data = await Weather.find({});
+
+    io.sockets.emit("listenCityWeather", {
+      data,
+      userId: socket.userId,
+    });
+  });
 });

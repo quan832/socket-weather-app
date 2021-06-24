@@ -11,14 +11,14 @@ import {
 } from "../../util/appUtil";
 import moment from "moment";
 
-export default function ModalUpdate({ socket, name, item }) {
+export default function ModalUpdate({ socket, setupSocket, name, item }) {
   const cityNameRef = React.createRef();
   const avrTemp = React.createRef();
   const typeRef = React.createRef();
   const contentRef = React.createRef();
   const highTempRef = React.createRef();
   const lowTempRef = React.createRef();
-    
+
   const dispatch = useDispatch();
 
   const handleClick = _.debounce(function () {
@@ -42,11 +42,9 @@ export default function ModalUpdate({ socket, name, item }) {
       .then((res) => {
         makeToast("success", `Update ${cityName} weather successfully`);
 
-        socket.emit("createCityWeather");
+        socket.emit("updateCityWeather");
 
-        socket.on("updateCityWeather", (weather) => {
-          dispatch({ type: FETCH_ALL_WEATHERS, payload: weather });
-        });
+        setupSocket();
       })
       .catch((err) => {
         makeToast("error", err);

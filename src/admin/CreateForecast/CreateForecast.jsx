@@ -1,39 +1,12 @@
 import React from "react";
-import PlusIcon from "../../assets/svg-icons/plus-icon.svg?component";
-
+import Preview from "../Preview/Preview";
 
 export default function CreateForecast() {
   return (
     <div className="tab-pane " id="events" role="tabpanel">
       <div className="container">
         <div className="row">
-          <div className="col col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
-            <div className="ui-block">
-              {/* Today Events */}
-              <div className="today-events calendar">
-                <div className="today-events-thumb">
-                  <div className="date">
-                    <div className="day-number">26</div>
-                    <div className="day-week">Saturday</div>
-                    <div className="month-year">March, 2016</div>
-                  </div>
-                </div>
-                <div className="list">
-                  <div className="control-block-button">
-                    <a
-                      href="#"
-                      className="btn btn-control bg-breez"
-                      data-toggle="modal"
-                      data-target="#create"
-                    >
-                      <PlusIcon />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              {/* ... end Today Events */}
-            </div>
-          </div>
+          <Preview />
           <div className="col col-xl-8 col-lg-8 col-md-12 col-sm-12 col-12">
             <div className="ui-block">
               {/* Full Calendar */}

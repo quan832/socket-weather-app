@@ -55,6 +55,12 @@ export default function ExtendedForecast({ match, socket }) {
 
   // render city weather forecast
   const renderDayWeatherItem = () => {
+    if (weathers === null)
+      return (
+        <div>
+          <h3 className="text-warning p-5">Dont have nothing to display</h3>
+        </div>
+      );
     return weathers?.map((item, index) => {
       return (
         <div
