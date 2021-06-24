@@ -15,6 +15,7 @@ import { createBrowserHistory } from "history";
 import LoginPage from "./Pages/Login/LoginPage";
 import WatchPage from "./Pages/Watch/WatchPage";
 import IndexPage from "./Pages/Index/IndexPage";
+import AdminPage from "./Pages/Admin/AdminPage";
 
 // import socket libary io
 import io from "socket.io-client";
@@ -29,10 +30,8 @@ import makeToast from "./Toaster";
 export const history = createBrowserHistory();
 
 function App() {
-  
-
   const [socket, setSocket] = React.useState(null);
-  
+
   // const SocketContext = React.createContext(setupSocket);
 
   const setupSocket = async () => {
@@ -59,13 +58,13 @@ function App() {
       });
 
       // if connect
-       newSocket.on("connect", async () => {
+      newSocket.on("connect", async () => {
         console.log("connected");
 
         makeToast("success", "Socket Disconnected!");
       });
-      
-      console.log(Swal)
+
+      console.log(Swal);
 
       setSocket(newSocket);
 
@@ -91,6 +90,7 @@ function App() {
           exact
           render={() => <WatchPage socket={socket} />}
         />
+        <Route path="/admin" exact render={() => <AdminPage />} />
       </Switch>
     </BrowserRouter>
   );

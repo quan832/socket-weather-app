@@ -54,7 +54,8 @@ io.on("connection", (socket) => {
 
   socket.on("getAllWeather", async ({ token }) => {
     console.log("A user want to get weather: " + socket.userId);
-
+    
+    console.log(socket)
     // wether
     const data = await Weather.find({});
 
