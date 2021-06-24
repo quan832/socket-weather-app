@@ -35,19 +35,6 @@ export default function Preview() {
                 <div className="card-header" id="headingOne-1">
                   <div className="event-time">
                     <time dateTime="2004-07-24T18:18">9:00am</time>
-                    <div className="more">
-                      <svg className="olymp-three-dots-icon">
-                        <use xlinkHref="svg-icons/sprites/icons.svg#olymp-three-dots-icon" />
-                      </svg>
-                      <ul className="more-dropdown">
-                        <li>
-                          <a href="#">Mark as Completed</a>
-                        </li>
-                        <li>
-                          <a href="#">Delete Event</a>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                   <h5 className="mb-0 title">
                     <a
@@ -57,7 +44,8 @@ export default function Preview() {
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      Breakfast at the Agency
+                      The air quality is ideal for most individuals; enjoy your
+                      normal outdoor activities.
                       <i className="fa fa-angle-down" aria-hidden="true" />
                       <span
                         className="event-status-icon"
@@ -81,19 +69,6 @@ export default function Preview() {
                 <div className="card-header" id="headingTwo-1">
                   <div className="event-time">
                     <time dateTime="2004-07-24T18:18">12:00pm</time>
-                    <div className="more">
-                      <svg className="olymp-three-dots-icon">
-                        <use xlinkHref="svg-icons/sprites/icons.svg#olymp-three-dots-icon" />
-                      </svg>
-                      <ul className="more-dropdown">
-                        <li>
-                          <a href="#">Mark as Completed</a>
-                        </li>
-                        <li>
-                          <a href="#">Delete Event</a>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                   <h5 className="mb-0 title">
                     <a
@@ -103,7 +78,7 @@ export default function Preview() {
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      Send the new “Olympus” project files to the Agency
+                      Partly cloudy. Low 26ºC. Winds WSW and variable.
                       <i className="fa fa-angle-down" aria-hidden="true" />
                       <span
                         className="event-status-icon"
@@ -127,19 +102,6 @@ export default function Preview() {
                 <div className="card-header" id="headingThree-1">
                   <div className="event-time">
                     <time dateTime="2004-07-24T18:18">6:30pm</time>
-                    <div className="more">
-                      <svg className="olymp-three-dots-icon">
-                        <use xlinkHref="svg-icons/sprites/icons.svg#olymp-three-dots-icon" />
-                      </svg>
-                      <ul className="more-dropdown">
-                        <li>
-                          <a href="#">Mark as Completed</a>
-                        </li>
-                        <li>
-                          <a href="#">Delete Event</a>
-                        </li>
-                      </ul>
-                    </div>
                   </div>
                   <h5 className="mb-0 title">
                     <a
@@ -149,22 +111,13 @@ export default function Preview() {
                       aria-expanded="true"
                       aria-controls="collapseOne"
                     >
-                      Take Querty to the Veterinarian
+                      Clouds and sunshine with a thunderstorm
                       <i className="fa fa-angle-down" aria-hidden="true" />
                       <span
                         className="event-status-icon"
                         data-toggle="modal"
                         data-target="#public-event"
-                      >
-                        <svg
-                          className="olymp-calendar-icon"
-                          data-toggle="tooltip"
-                          data-placement="top"
-                          data-original-title="UNCOMPLETED"
-                        >
-                          <use xlinkHref="svg-icons/sprites/icons.svg#olymp-calendar-icon" />
-                        </svg>
-                      </span>
+                      ></span>
                     </a>
                   </h5>
                 </div>
