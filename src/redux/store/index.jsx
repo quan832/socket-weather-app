@@ -9,7 +9,7 @@ import logger from "redux-logger";
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["task"],
+  whitelist: ["weatherState"],
 };
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

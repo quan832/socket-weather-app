@@ -24,7 +24,7 @@ import { APP_TOKEN, defaultCity } from "./util/appUtil";
 // import makeToast
 import makeToast from "./Toaster";
 
-import "./App.css";
+import "./index.css";
 // alert
 // import Swal from "sweetalert2";
 

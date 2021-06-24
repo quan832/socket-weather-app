@@ -10,6 +10,10 @@ import ArrowIcon from "../../assets/svg-icons/dropdown-arrow-icon.svg?component"
 import LogoutIcon from "../../assets/svg-icons/logout-icon.svg?component";
 import StarIcon from "../../assets/svg-icons/star-icon.svg?component";
 
+import { NavLink } from "react-router-dom";
+
+import _ from "lodash";
+
 export default function Header({ socket }) {
   const [citySearch, setCitySearch] = useState("");
 
@@ -18,13 +22,17 @@ export default function Header({ socket }) {
   const dispatch = useDispatch();
   const cityRef = React.createRef();
 
+  const handleClick = _.debounce(() => {
+    setSubmit(!submit);
+  }, 300);
+
   useEffect(() => {
-    if (socket && submit) {
+    console.log(_.isEmpty(submit));
+    if (socket && submit === true) {
       const weather = cityRef.current.value;
       socket.emit("getCityWeather", weather);
 
       socket.on("newCityWeather", ({ data, userId }) => {
-        console.log(data);
         if (data === null) {
           return makeToast("error", `Your city is not match!`);
         }
@@ -35,6 +43,7 @@ export default function Header({ socket }) {
       socket.on("error", (err) => {
         makeToast("error", `${err}`);
       });
+      setSubmit(false);
     }
   }, [submit]);
 
@@ -55,7 +64,7 @@ export default function Header({ socket }) {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                setSubmit(!submit);
+                handleClick();
               }}
             >
               <FindWeather />
@@ -80,10 +89,10 @@ export default function Header({ socket }) {
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <NavLink to="/admin">
                         <StarIcon />
                         <span>Return admin page</span>
-                      </a>
+                      </NavLink>
                     </li>
                     <li>
                       <a href="#">

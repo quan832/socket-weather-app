@@ -23,13 +23,14 @@ export default function ModalCreate() {
             </svg>
           </a>
           <div className="modal-header">
-            <h6 className="title">Create an Event</h6>
+            <h6 className="title">Create city weather</h6>
           </div>
           <div className="modal-body">
             <div className="form-group label-floating">
               <label className="control-label">City Name</label>
               <input
                 className="form-control"
+                style={{ height: `calc(2.5em + .75rem + 2px)` }}
                 placeholder
                 defaultValue="Ho Chi Minh City"
                 type="text"
@@ -40,6 +41,7 @@ export default function ModalCreate() {
               <input
                 className="form-control"
                 placeholder
+                style={{ height: `calc(2.5em + .75rem + 2px)` }}
                 defaultValue="Ho Chi Minh City"
                 type="text"
               />
@@ -59,6 +61,7 @@ export default function ModalCreate() {
                   <label className="control-label">Date Time</label>
                   <input
                     className="form-control"
+                    style={{ height: `calc(2.5em + .75rem + 2px)` }}
                     placeholder
                     defaultValue="09:00"
                     type="text"
@@ -68,7 +71,10 @@ export default function ModalCreate() {
               <div className="col col-lg-3 col-md-3 col-sm-12 col-12">
                 <div className="form-group label-floating is-select">
                   <label className="control-label">AM-PM</label>
-                  <select className="selectpicker form-control">
+                  <select
+                    className="selectpicker form-control"
+                    style={{ height: `calc(2.5em + .75rem + 2px)` }}
+                  >
                     <option value="MA">AM</option>
                     <option value="FE">PM</option>
                   </select>
@@ -77,7 +83,10 @@ export default function ModalCreate() {
               <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
                 <div className="form-group label-floating is-select">
                   <label className="control-label">Forecast</label>
-                  <select className="selectpicker form-control">
+                  <select
+                    className="selectpicker form-control"
+                    style={{ height: `calc(2.5em + .75rem + 2px)` }}
+                  >
                     <option value="sunny">Sunny</option>
                     <option value="rain">Rain </option>
                   </select>
@@ -90,13 +99,11 @@ export default function ModalCreate() {
                 className="form-control"
                 placeholder
                 defaultValue={
-                  "I need to take Querty for a check up and ask the doctor if he needs a new tank.\n              "
+                  "The weather today is many wind, credentials should stay at home to safe. We will notify you in the future  \n"
                 }
               />
             </div>
-            <button className="btn btn-breez btn-lg full-width">
-              Create Event
-            </button>
+            <button className="btn btn-breez btn-lg full-width">Create</button>
           </div>
         </div>
       </div>

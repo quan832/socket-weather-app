@@ -2,6 +2,7 @@ import React from "react";
 import PlusIcon from "../../assets/svg-icons/plus-icon.svg?component";
 
 export default function CreateForecast() {
+  
   return (
     <div className="tab-pane " id="events" role="tabpanel">
       <div className="container">
@@ -364,7 +365,7 @@ export default function CreateForecast() {
                                               <div className="fc-content">
                                                 {" "}
                                                 <span className="fc-title">
-                                                  Chris Greyson’s Bday
+                                                  Storm
                                                 </span>
                                               </div>
                                             </a>
@@ -382,7 +383,7 @@ export default function CreateForecast() {
                                               <div className="fc-content">
                                                 {" "}
                                                 <span className="fc-title">
-                                                  Make Dinner Plans...
+                                                  Gale ...
                                                 </span>
                                               </div>
                                             </a>
@@ -736,7 +737,7 @@ export default function CreateForecast() {
                                               <div className="fc-content">
                                                 {" "}
                                                 <span className="fc-title">
-                                                  Breakfast at the...
+                                                  Torrential rain ...
                                                 </span>
                                               </div>
                                             </a>
@@ -752,7 +753,7 @@ export default function CreateForecast() {
                                               <div className="fc-content">
                                                 {" "}
                                                 <span className="fc-title">
-                                                  Jenny’s Birthday...
+                                                  Humid...
                                                 </span>
                                               </div>
                                             </a>
@@ -769,7 +770,7 @@ export default function CreateForecast() {
                                               <div className="fc-content">
                                                 {" "}
                                                 <span className="fc-title">
-                                                  Send the new...
+                                                  Cold...
                                                 </span>
                                               </div>
                                             </a>
@@ -785,7 +786,7 @@ export default function CreateForecast() {
                                               <div className="fc-content">
                                                 {" "}
                                                 <span className="fc-title">
-                                                  Videocall to talk...
+                                                  Freezing ...
                                                 </span>
                                               </div>
                                             </a>
@@ -800,7 +801,7 @@ export default function CreateForecast() {
                                               <div className="fc-content">
                                                 {" "}
                                                 <span className="fc-title">
-                                                  Take Querty to the...
+                                                  Overcast ...
                                                 </span>
                                               </div>
                                             </a>

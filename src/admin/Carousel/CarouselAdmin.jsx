@@ -10,13 +10,13 @@ export default function CarouselAdmin() {
           <div className="row">
             <div className="col col-lg-8 m-auto col-md-8 col-sm-12 col-12">
               <div className="main-header-content">
-                <h1>Create and Manage Events</h1>
+                <h1>Create and Manage Weathers</h1>
                 <p>
                   Welcome to your personal planner assistant. Here you’ll see
-                  all your next events and invites that your friends sent you.
-                  You can create 3 different types of events: Personal (for your
-                  daily errands), Private (for you and friends only) and Public
-                  (open to everyone). Create your events, invite friends and
+                  all your next weathers and forecast in your city now. You can
+                  create 2 different types of : City Weather (for your city
+                  weather ), and Date Weather (open your date weathers in your
+                  cityto everyone). Create your weathers, invite friends and
                   have fun!
                 </p>
               </div>

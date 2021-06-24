@@ -7,6 +7,8 @@ import ArrowIcon from "../../assets/svg-icons/dropdown-arrow-icon.svg?component"
 import LogoutIcon from "../../assets/svg-icons/logout-icon.svg?component";
 import StarIcon from "../../assets/svg-icons/star-icon.svg?component";
 
+import { NavLink } from "react-router-dom";
+
 export default function HeaderAdmin() {
   return (
     <Fragment>
@@ -34,10 +36,10 @@ export default function HeaderAdmin() {
                         </a>
                       </li>
                       <li>
-                        <a href="#">
+                        <NavLink to="/">
                           <StarIcon />
                           <span>Return main page</span>
-                        </a>
+                        </NavLink>
                       </li>
                       <li>
                         <a href="#">

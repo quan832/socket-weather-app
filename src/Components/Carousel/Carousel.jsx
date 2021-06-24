@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 import weatherBottom from "../../assets/img/weather-bottom.png";
 import WeatherRefresh from "../../assets/svg-icons/weather-refresh-icon.svg?component";
+import SunnyWeather from "../../assets/svg-icons/sprites/icons-weather-sunny.svg?component";
 
 export default function Carousel() {
-
-  const cityWeather = useSelector( state=> state.weatherState.cityWeather );
+  const cityWeather = useSelector((state) => state.weatherState.cityWeather);
 
   return (
     <div className="main-header main-header-weather">
@@ -19,16 +19,18 @@ export default function Carousel() {
           <div className="m-auto col-lg-4 col-md-8 col-sm-12 col-12">
             <div className="wethear-content">
               <div className="wethear-now">
-                <svg className="olymp-weather-partly-sunny-icon icon">
-                  <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-partly-sunny-icon" />
-                </svg>
-                <div className="temperature-sensor">{cityWeather.avrTemperature}°C</div>
+                <SunnyWeather />
+                <div className="temperature-sensor">
+                  {cityWeather.avrTemperature}°C
+                </div>
                 <div className="max-min-temperature">
                   <span>Low: {cityWeather.lowTemperature}°</span>
                   <span>High: {cityWeather.highTemperature}°</span>
                 </div>
               </div>
-              <div className="climate">Partly Sunny</div>
+              <div className="climate" style={{ textTransform: "capitalize" }}>
+                {cityWeather.typeIcon}
+              </div>
               <div className="wethear-now-description">
                 <div>
                   <svg className="olymp-weather-thermometer-icon icon">

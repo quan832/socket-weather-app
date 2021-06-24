@@ -13,11 +13,24 @@ export default function Input({ socket }) {
   const dispatch = useDispatch();
 
   const fetchWeather = _.debounce(() => {
-    dispatch({ type: CLICK_BUTTON });
-  }, 450);
+    if (button) {
+      dispatch({ type: CLICK_BUTTON });
+    } else {
+      dispatch({});
+    }
+  }, 280);
 
-  // call action
+  const [button, setButton] = useState(true);
+  const [isCity, setIsCity] = useState("Show All City forecast on Widget");
 
+  useEffect(() => {
+    switch (button) {
+      case true:
+        return setIsCity("Show All City forecast on Widget");
+      case false:
+        return setIsCity("Show Weather Date forecast on Widget");
+    }
+  });
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -32,7 +45,7 @@ export default function Input({ socket }) {
                 <label className="control-label">Extended Forecast Days</label>
                 <select
                   className="selectpicker form-control"
-                  style={{ paddingTop: "40px" }}
+                  style={{ height: `calc(2.5em + .75rem + 2px)` }}
                 >
                   <option value="AL">Show Next 7 days</option>
                   <option value={2}>Show Next 10 days</option>
@@ -46,10 +59,17 @@ export default function Input({ socket }) {
             </div>
             <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
               <div className="switcher-block" style={{ marginTop: "15px" }}>
-                <div className="h6 title">Show All City forecast on Widget</div>
+                <div className="h6 title">{isCity}</div>
                 <div className="togglebutton blue">
                   <label>
-                    <input type="checkbox" defaultChecked />
+                    <input
+                      type="checkbox"
+                      defaultChecked
+                      onClick={(e) => {
+                        let temp = button;
+                        setButton(!temp);
+                      }}
+                    />
                     <span className="toggle" />
                   </label>
                 </div>
