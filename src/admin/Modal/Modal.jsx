@@ -5,11 +5,13 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { FETCH_ALL_WEATHERS } from "../../util/appUtil";
 
-export default function ModalCreate({ socket }) {
+export default function ModalCreate({ socket, name }) {
   const cityNameRef = React.createRef();
   const avrTemp = React.createRef();
   const typeRef = React.createRef();
   const contentRef = React.createRef();
+  const highTempRef = React.createRef();
+  const lowTempRef = React.createRef();
 
   const dispatch = useDispatch();
 
@@ -19,14 +21,17 @@ export default function ModalCreate({ socket }) {
     const avrTemperature = avrTemp.current.value;
     const typeIcon = typeRef.current.value;
     const content = contentRef.current.value;
-    const data = null;
+    const highTemperature = highTempRef.current.value;
+    const lowTemperature = lowTempRef.current.value;
 
-    console.log(cityName, avrTemperature, typeIcon, content, data);
+    const data = null;
 
     axios
       .post("http://localhost:8000/weather", {
         cityName,
         avrTemperature,
+        highTemperature,
+        lowTemperature,
         typeIcon,
         content,
         data,
@@ -48,7 +53,7 @@ export default function ModalCreate({ socket }) {
   return (
     <div
       className="modal fade"
-      id="create-event"
+      id={name}
       tabIndex={-1}
       role="dialog"
       aria-labelledby="create-event"
@@ -91,6 +96,34 @@ export default function ModalCreate({ socket }) {
                 type="text"
                 ref={avrTemp}
               />
+            </div>
+            <div className="row">
+              <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
+                <div className="form-group label-floating">
+                  <label className="control-label">High Temperature</label>
+                  <input
+                    className="form-control"
+                    placeholder
+                    style={{ height: `calc(2.5em + .75rem + 2px)` }}
+                    defaultValue="30"
+                    type="text"
+                    ref={highTempRef}
+                  />
+                </div>
+              </div>
+              <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
+                <div className="form-group label-floating">
+                  <label className="control-label">Low Temperature</label>
+                  <input
+                    className="form-control"
+                    placeholder
+                    style={{ height: `calc(2.5em + .75rem + 2px)` }}
+                    defaultValue="30"
+                    type="text"
+                    ref={lowTempRef}
+                  />
+                </div>
+              </div>
             </div>
             <div className="form-group date-time-picker label-floating">
               <label className="control-label">Weather Date</label>
@@ -154,8 +187,9 @@ export default function ModalCreate({ socket }) {
             <button
               className="btn btn-breez btn-lg full-width"
               onClick={handleClick}
+              style={{ textTransform: "capitalize" }}
             >
-              Create
+              {name}
             </button>
           </div>
         </div>

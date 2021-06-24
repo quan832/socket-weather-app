@@ -3,19 +3,23 @@ import React, { Fragment, useEffect, useState } from "react";
 import Input from "./Input/Input";
 import ExtendedForecast from "./Extened/ExtendedForecast";
 import Preview from "./Preview/Preview";
-import { APP_TOKEN, FETCH_ALL_WEATHERS } from "../../util/appUtil";
+import {
+  APP_TOKEN,
+  FETCH_ALL_WEATHERS,
+  FETCH_CITY_WEATHER,
+} from "../../util/appUtil";
 import { useDispatch, useSelector } from "react-redux";
 import makeToast from "../../Toaster";
 
 export default function MainContent({ socket }) {
-  const { isUpload } = useSelector((state) => state.weatherState);
+  const { isUpload, isButton } = useSelector((state) => state.weatherState);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem(APP_TOKEN);
 
-    if (socket && isUpload === true) {
+    if (socket && isUpload === true && isButton === true) {
       socket.emit("getAllWeather", { token });
 
       socket.on("newAllWeathers", (weather) => {
@@ -23,7 +27,24 @@ export default function MainContent({ socket }) {
         makeToast("success", "Get weather forecast!");
       });
     }
-  }, [isUpload]);
+    if (isButton === false && socket && isUpload === true) {
+      const defaultName = "saigon";
+
+      socket.emit("getCityWeather", defaultName);
+
+      socket.on("newCityWeather", ({ data, userId }) => {
+        if (data === null) {
+          return makeToast("error", `Your city is not match!`);
+        }
+        makeToast("success", `Get ${data.cityName} weather forecast!`);
+        return dispatch({ type: FETCH_CITY_WEATHER, payload: data });
+      });
+
+      socket.on("error", (err) => {
+        makeToast("error", `${err}`);
+      });
+    }
+  }, [isUpload, isButton]);
 
   return (
     <Fragment>

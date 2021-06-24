@@ -1,13 +1,61 @@
+import moment from "moment";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { APP_TOKEN, weatherOptions } from "../../../util/appUtil";
+import { APP_TOKEN, FORMAT_TIME, weatherOptions } from "../../../util/appUtil";
 
 export default function ExtendedForecast({ match, socket }) {
   // data
-  const { isFetching, weathers } = useSelector((state) => state.weatherState);
+  const { isFetching, isButton, weathers, cityWeather } = useSelector(
+    (state) => state.weatherState
+  );
 
+  const { data } = cityWeather;
+
+  // render specific date
+  const renderDateWeatherItem = () => {
+    if (data === null)
+      return (
+        <div>
+          <h3 className="text-warning p-5">Dont have nothing to display</h3>
+        </div>
+      );
+    return data?.map((item, index) => {
+      return (
+        <div
+          key={index}
+          className="day-wethear-item"
+          style={{ borderRight: "1px solid #e6ecf5" }}
+          data-mh="wethear-item"
+        >
+          <div className="title">
+            {moment.utc(item.cityName).format(FORMAT_TIME)}
+          </div>
+          <div
+            style={{ width: "125px", height: "125px", objectFit: "contain" }}
+          >
+            <img
+              style={{ width: "100%" }}
+              src={
+                window.location.origin +
+                `/src/assets/img/icon_weather_2/${item.typeIcon}.png`
+              }
+            />
+          </div>
+          <div className="wethear-now">
+            <div className="temperature-sensor">{item.avrTemperature}</div>
+            <div className="max-min-temperature">
+              <span>{item.lowTemperature}</span>
+              <span className="high">{item.highTemperature}°</span>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  };
+
+  // render city weather forecast
   const renderDayWeatherItem = () => {
-    return weathers.map((item, index) => {
+    return weathers?.map((item, index) => {
       return (
         <div
           key={index}
@@ -23,21 +71,30 @@ export default function ExtendedForecast({ match, socket }) {
               style={{ width: "100%" }}
               src={
                 window.location.origin +
-                `/src/assets/img/icon_weather/${item.typeIcon}.png`
+                `/src/assets/img/icon_weather_2/${item.typeIcon}.png`
               }
             />
           </div>
           <div className="wethear-now">
             <div className="temperature-sensor">{item.avrTemperature}</div>
             <div className="max-min-temperature">
-              <span>55°</span>
-              <span className="high">69°</span>
+              <span>{item.lowTemperature}</span>
+              <span className="high">{item.highTemperature}°</span>
             </div>
           </div>
         </div>
       );
     });
   };
+
+  // render follow by button
+  const renderIsButton = () => {
+    if (isButton) {
+      return renderDayWeatherItem();
+    }
+    return renderDateWeatherItem();
+  };
+
   return (
     <div className="ui-block">
       <div className="ui-block-title">
@@ -51,178 +108,12 @@ export default function ExtendedForecast({ match, socket }) {
             data-swiper-parallax={-500}
           >
             {isFetching ? (
-              renderDayWeatherItem()
+              renderIsButton()
             ) : (
               <h1 style={{ textAlign: "center", paddingTop: "100px" }}>
                 Select Day to show
               </h1>
             )}
-          </div>
-          <div
-            className="swiper-slide swiper-slide-weather"
-            data-swiper-parallax={-500}
-          >
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Tomorrow</div>
-              <svg className="olymp-weather-sunny-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-sunny-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">60°</div>
-                <div className="max-min-temperature">
-                  <span>55°</span>
-                  <span className="high">69°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Monday 28</div>
-              <svg className="olymp-weather-wind-icon-header icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-wind-icon-header" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">58°</div>
-                <div className="max-min-temperature">
-                  <span>52°</span>
-                  <span className="high">64°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Tuesday 29</div>
-              <svg className="olymp-weather-cloudy-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-cloudy-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">67°</div>
-                <div className="max-min-temperature">
-                  <span>62°</span>
-                  <span className="high">77°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Wednesday 30</div>
-              <svg className="olymp-weather-rain-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-rain-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">70°</div>
-                <div className="max-min-temperature">
-                  <span>65°</span>
-                  <span className="high">82°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Thursday 31</div>
-              <svg className="olymp-weather-storm-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-storm-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">73°</div>
-                <div className="max-min-temperature">
-                  <span>68°</span>
-                  <span className="high">79°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Friday 1</div>
-              <svg className="olymp-weather-snow-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-snow-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">68°</div>
-                <div className="max-min-temperature">
-                  <span>56°</span>
-                  <span className="high">69°</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="swiper-slide swiper-slide-weather"
-            data-swiper-parallax={-500}
-          >
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Tomorrow</div>
-              <svg className="olymp-weather-sunny-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-sunny-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">60°</div>
-                <div className="max-min-temperature">
-                  <span>55°</span>
-                  <span className="high">69°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Monday 28</div>
-              <svg className="olymp-weather-wind-icon-header icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-wind-icon-header" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">58°</div>
-                <div className="max-min-temperature">
-                  <span>52°</span>
-                  <span className="high">64°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Tuesday 29</div>
-              <svg className="olymp-weather-cloudy-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-cloudy-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">67°</div>
-                <div className="max-min-temperature">
-                  <span>62°</span>
-                  <span className="high">77°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Wednesday 30</div>
-              <svg className="olymp-weather-rain-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-rain-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">70°</div>
-                <div className="max-min-temperature">
-                  <span>65°</span>
-                  <span className="high">82°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Thursday 31</div>
-              <svg className="olymp-weather-storm-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-storm-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">73°</div>
-                <div className="max-min-temperature">
-                  <span>68°</span>
-                  <span className="high">79°</span>
-                </div>
-              </div>
-            </div>
-            <div className="day-wethear-item" data-mh="wethear-item">
-              <div className="title">Friday 1</div>
-              <svg className="olymp-weather-snow-icon icon">
-                <use xlinkHref="svg-icons/sprites/icons-weather.svg#olymp-weather-snow-icon" />
-              </svg>
-              <div className="wethear-now">
-                <div className="temperature-sensor">68°</div>
-                <div className="max-min-temperature">
-                  <span>56°</span>
-                  <span className="high">69°</span>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         {/* If we need pagination */}

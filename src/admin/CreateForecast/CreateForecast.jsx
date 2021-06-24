@@ -24,7 +24,7 @@ export default function CreateForecast() {
                       href="#"
                       className="btn btn-control bg-breez"
                       data-toggle="modal"
-                      data-target="#create-event"
+                      data-target="#create"
                     >
                       <PlusIcon />
                     </a>

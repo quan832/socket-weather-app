@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   APP_TOKEN,
   CLICK_BUTTON,
+  CLICK_BUTTON_1,
   FETCH_ALL_WEATHERS,
 } from "../../../util/appUtil";
 
@@ -13,9 +14,9 @@ export default function Input({ socket }) {
 
   const fetchWeather = _.debounce(() => {
     if (button) {
-      dispatch({ type: CLICK_BUTTON });
+      dispatch({ type: CLICK_BUTTON, payload: button });
     } else {
-      dispatch({});
+      dispatch({ type: CLICK_BUTTON, payload: button });
     }
   }, 280);
 
@@ -27,7 +28,7 @@ export default function Input({ socket }) {
       case true:
         return setIsCity("Show All City forecast on Widget");
       case false:
-        return setIsCity("Show Weather Date forecast on Widget");
+        return setIsCity("Get your Weather Date forecast on Widget");
     }
   });
   return (

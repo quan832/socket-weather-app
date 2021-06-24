@@ -3,9 +3,10 @@ import React from "react";
 //import component
 import HeaderAdmin from "../../admin/Header/HeaderAdmin";
 import CarouselAdmin from "../../admin/Carousel/CarouselAdmin";
-import ModalCreate from "../../admin/Modal/ModalCreate";
+import Modal from "../../admin/Modal/Modal";
 import CreateForecast from "../../admin/CreateForecast/CreateForecast";
 import ListForecast from "../../admin/List/ListForecast";
+import ModalUpdate from "../../admin/Modal/ModalUpdate";
 
 export default function AdminPage({ socket }) {
   return (
@@ -56,10 +57,11 @@ export default function AdminPage({ socket }) {
       {/* Tab panes */}
       <div className="tab-content">
         <CreateForecast />
-        <ListForecast />
+        <ListForecast socket={socket} />
       </div>
       {/* Window-popup Create Event */}
-      <ModalCreate socket={socket} />
+      <Modal socket={socket} name={"create"} />
+
       {/* ... end Window-popup Create Event */}
       {/* Window-popup-CHAT for responsive min-width: 768px */}
     </div>

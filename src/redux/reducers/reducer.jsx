@@ -41,6 +41,7 @@ export default function (state = initialState, action) {
             ...state.weatherState.cityWeather,
             ...action.payload,
           },
+          isUpload: false,
         },
       };
     }
@@ -56,14 +57,17 @@ export default function (state = initialState, action) {
     }
 
     case CLICK_BUTTON_SUCCESS: {
+      let tempButton = action.payload;
       return {
         ...state,
         weatherState: {
           ...state.weatherState,
           isUpload: true,
+          isButton: tempButton,
         },
       };
     }
+
     default:
       return state;
   }

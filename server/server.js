@@ -28,7 +28,6 @@ const server = app.listen(8000, () => {
 
 const io = require("socket.io")(server);
 const jwt = require("jwt-then");
-const { default: axios } = require("axios");
 
 // const Message = mongoose.model("Message");
 const User = mongoose.model("User");
@@ -71,7 +70,6 @@ io.on("connection", (socket) => {
     const data = await Weather.findOne({cityName: new RegExp('^'+weatherName+'$', "i")}, function(err, doc){
        return err
     });
-
     
     socket.emit("newCityWeather", {
       data,
@@ -91,6 +89,4 @@ io.on("connection", (socket) => {
       userId: socket.userId,
     });
   })
-
-
 });

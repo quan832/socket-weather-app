@@ -44,7 +44,9 @@ function LoginPage(props) {
         });
         props.setupSocket();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        makeToast("error", "User and Password does not match");
+      });
   };
 
   return (

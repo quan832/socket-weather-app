@@ -2,6 +2,7 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import Api from "../../services/weatherAPI";
 import {
   CLICK_BUTTON,
+  CLICK_BUTTON_1,
   CLICK_BUTTON_SUCCESS,
   FETCH_ALL_WEATHERS,
   FETCH_ALL_WEATHERS_SUCCESS,
@@ -11,34 +12,27 @@ import {
 
 function* fetchAllWeathers(action) {
   try {
-    const {
-      payload
-    } = action
+    const { payload } = action;
 
-    console.log(payload)
+    console.log(payload);
 
     yield put({
       type: FETCH_ALL_WEATHERS_SUCCESS,
-      payload: payload.data
+      payload: payload.data,
     });
-    
   } catch (error) {}
 }
 
-
 function* fetchCityWeather(action) {
   try {
-    const {
-      payload
-    } = action
+    const { payload } = action;
 
-    console.log(payload)
+    console.log(payload);
 
     yield put({
       type: FETCH_CITY_WEATHER_SUCCESS,
-      payload: payload
+      payload: payload,
     });
-    
   } catch (error) {}
 }
 
@@ -46,15 +40,17 @@ function* watchFetchAllWeather() {
   yield takeLatest(FETCH_ALL_WEATHERS, fetchAllWeathers);
 }
 
-function* watchFetchCityWeather(){
-  yield takeLatest(FETCH_CITY_WEATHER, fetchCityWeather)
+function* watchFetchCityWeather() {
+  yield takeLatest(FETCH_CITY_WEATHER, fetchCityWeather);
 }
-function* clickButton() {
+
+function* clickButton({ payload }) {
   try {
+    console.log(payload);
     yield put({
       type: CLICK_BUTTON_SUCCESS,
+      payload,
     });
-    
   } catch (error) {}
 }
 
@@ -63,5 +59,9 @@ function* watchClickButton() {
 }
 
 export default function* weatherSaga() {
-  yield all([watchFetchAllWeather(),watchClickButton(),watchFetchCityWeather()]);
+  yield all([
+    watchFetchAllWeather(),
+    watchClickButton(),
+    watchFetchCityWeather(),
+  ]);
 }

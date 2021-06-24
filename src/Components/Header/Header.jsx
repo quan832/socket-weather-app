@@ -28,6 +28,8 @@ export default function Header({ socket }) {
 
   const { type } = useSelector((state) => state.userState);
 
+  const { weathers } = useSelector((state) => state.weatherState);
+
   useEffect(() => {
     console.log(_.isEmpty(submit));
     if (socket && submit === true) {
@@ -48,6 +50,45 @@ export default function Header({ socket }) {
       setSubmit(false);
     }
   }, [submit]);
+
+  const renderNavLink = () => {
+    if (_.isEmpty(weathers)) {
+      return (
+        <li
+          onClick={() => {
+            makeToast("error", "you must save all city weathers");
+          }}
+        >
+          <a>
+            <StarIcon />
+            <span>Return admin page</span>
+          </a>
+        </li>
+      );
+    } else if (type === "admin") {
+      return (
+        <li>
+          <NavLink to="/admin">
+            <StarIcon />
+            <span>Return admin page</span>
+          </NavLink>
+        </li>
+      );
+    } else {
+      return (
+        <li
+          onClick={() => {
+            makeToast("error", "you don't have permission");
+          }}
+        >
+          <a>
+            <StarIcon />
+            <span>Return admin page</span>
+          </a>
+        </li>
+      );
+    }
+  };
 
   return (
     <header className="header" id="site-header">
@@ -90,26 +131,7 @@ export default function Header({ socket }) {
                         <span>Profile Settings</span>
                       </a>
                     </li>
-                    {type === "admin" ? (
-                      <li>
-                        <NavLink to="/admin">
-                          <StarIcon />
-                          <span>Return admin page</span>
-                        </NavLink>
-                      </li>
-                    ) : (
-                      <li
-                        onClick={() => {
-                          makeToast("error", "you don't have permission");
-                        }}
-                      >
-                        <a>
-                          <StarIcon />
-                          <span>Return admin page</span>
-                        </a>
-                      </li>
-                    )}
-
+                    {renderNavLink()}
                     <li>
                       <a
                         onClick={() => {

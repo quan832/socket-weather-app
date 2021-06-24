@@ -2,7 +2,15 @@ const mongoose = require("mongoose");
 const Weather = mongoose.model("Weather");
 
 exports.createCityWeather = async (req, res) => {
-  const { cityName, avrTemperature, typeIcon, content , data} = req.body;
+  const {
+    cityName,
+    avrTemperature,
+    typeIcon,
+    highTemperature,
+    lowTemperature,
+    content,
+    data,
+  } = req.body;
 
   const cityNameRegex = /^[A-Za-z\s]+$/;
 
@@ -16,6 +24,8 @@ exports.createCityWeather = async (req, res) => {
   const weatherCity = new Weather({
     cityName,
     avrTemperature,
+    highTemperature,
+    lowTemperature,
     typeIcon,
     content,
     data,
@@ -30,6 +40,47 @@ exports.createCityWeather = async (req, res) => {
   // xu ly weather trong nay
 };
 
+exports.updateYourCityWeather = async (req, res) => {
+  const weathers = await Weather.findById(req.params.id);
+
+  const {
+    cityName,
+    avrTemperature,
+    typeIcon,
+    highTemperature,
+    lowTemperature,
+    content,
+    data,
+  } = req.body;
+
+  Weather.findByIdAndUpdate(
+    req.params.id,
+    {
+      cityName,
+      avrTemperature,
+      typeIcon,
+      highTemperature,
+      lowTemperature,
+      content,
+      data,
+    },
+    { new: true, useFindAndModify: false}
+  )
+    .then((id) => {
+      if (!id) {
+        return res.status(404).send({
+          message: "Update not found with id " + req.params.id,
+        });
+      }
+      res.send(id);
+    })
+    .catch((err) => {
+      return res.status(500).send({
+        message: "Error updating note with id " + req.params.id,
+      });
+    });
+};
+
 exports.getAllWeather = async (req, res) => {
   // wether
   const weathers = await Weather.find({});
@@ -39,6 +90,6 @@ exports.getAllWeather = async (req, res) => {
 
 exports.getYourCityWeather = async (req, res) => {
   const weathers = await Weather.findById(req.params.id);
-  
+
   res.json(weathers);
 };
