@@ -1,6 +1,50 @@
 import React from "react";
+import _ from "lodash";
+import makeToast from "../../Toaster";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { FETCH_ALL_WEATHERS } from "../../util/appUtil";
 
-export default function ModalCreate() {
+export default function ModalCreate({ socket }) {
+  const cityNameRef = React.createRef();
+  const avrTemp = React.createRef();
+  const typeRef = React.createRef();
+  const contentRef = React.createRef();
+
+  const dispatch = useDispatch();
+
+  const handleClick = _.debounce(function () {
+    // city weather
+    const cityName = cityNameRef.current.value;
+    const avrTemperature = avrTemp.current.value;
+    const typeIcon = typeRef.current.value;
+    const content = contentRef.current.value;
+    const data = null;
+
+    console.log(cityName, avrTemperature, typeIcon, content, data);
+
+    axios
+      .post("http://localhost:8000/weather", {
+        cityName,
+        avrTemperature,
+        typeIcon,
+        content,
+        data,
+      })
+      .then((res) => {
+        makeToast("success", `Create ${cityName} weather successfully`);
+
+        socket.emit("createCityWeather");
+
+        socket.on("updateCityWeather", (weather) => {
+          dispatch({ type: FETCH_ALL_WEATHERS, payload: weather });
+        });
+      })
+      .catch((err) => {
+        makeToast("error", err);
+      });
+  }, 500);
+
   return (
     <div
       className="modal fade"
@@ -34,6 +78,7 @@ export default function ModalCreate() {
                 placeholder
                 defaultValue="Ho Chi Minh City"
                 type="text"
+                ref={cityNameRef}
               />
             </div>
             <div className="form-group label-floating">
@@ -42,12 +87,13 @@ export default function ModalCreate() {
                 className="form-control"
                 placeholder
                 style={{ height: `calc(2.5em + .75rem + 2px)` }}
-                defaultValue="Ho Chi Minh City"
+                defaultValue="30"
                 type="text"
+                ref={avrTemp}
               />
             </div>
             <div className="form-group date-time-picker label-floating">
-              <label className="control-label">Event Date</label>
+              <label className="control-label">Weather Date</label>
               <input name="datetimepicker" defaultValue="26/03/2016" />
               <span className="input-group-addon">
                 <svg className="olymp-calendar-icon icon">
@@ -86,6 +132,7 @@ export default function ModalCreate() {
                   <select
                     className="selectpicker form-control"
                     style={{ height: `calc(2.5em + .75rem + 2px)` }}
+                    ref={typeRef}
                   >
                     <option value="sunny">Sunny</option>
                     <option value="rain">Rain </option>
@@ -99,11 +146,17 @@ export default function ModalCreate() {
                 className="form-control"
                 placeholder
                 defaultValue={
-                  "The weather today is many wind, credentials should stay at home to safe. We will notify you in the future  \n"
+                  "The weather today is so much wind, credentials should stay at home to safe. We will notify you in the future  \n"
                 }
+                ref={contentRef}
               />
             </div>
-            <button className="btn btn-breez btn-lg full-width">Create</button>
+            <button
+              className="btn btn-breez btn-lg full-width"
+              onClick={handleClick}
+            >
+              Create
+            </button>
           </div>
         </div>
       </div>

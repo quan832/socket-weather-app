@@ -17,6 +17,14 @@ var weatherSchema = mongoose.Schema({
   typeIcon: {
     type: String,
   },
+  highTemperature:{
+    type: Number,
+    required: "avrTemperature is required!!",
+  },
+  lowTemperature:{
+    type: Number,
+    required: "avrTemperature is required!!",
+  },
   data: [
     {
       dateNumber: { type: Date },

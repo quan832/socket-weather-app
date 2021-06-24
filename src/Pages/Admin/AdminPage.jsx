@@ -7,7 +7,7 @@ import ModalCreate from "../../admin/Modal/ModalCreate";
 import CreateForecast from "../../admin/CreateForecast/CreateForecast";
 import ListForecast from "../../admin/List/ListForecast";
 
-export default function AdminPage() {
+export default function AdminPage({ socket }) {
   return (
     <div>
       <HeaderAdmin />
@@ -59,16 +59,9 @@ export default function AdminPage() {
         <ListForecast />
       </div>
       {/* Window-popup Create Event */}
-      <ModalCreate />
+      <ModalCreate socket={socket} />
       {/* ... end Window-popup Create Event */}
       {/* Window-popup-CHAT for responsive min-width: 768px */}
-      <a className="back-to-top" href="#">
-        <img
-          src="svg-icons/back-to-top.svg"
-          alt="arrow"
-          className="back-icon"
-        />
-      </a>
     </div>
   );
 }

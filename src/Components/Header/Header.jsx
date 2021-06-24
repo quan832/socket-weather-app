@@ -83,7 +83,7 @@ export default function Header({ socket }) {
                   </div>
                   <ul className="account-settings">
                     <li>
-                      <a href="29-YourAccount-AccountSettings.html">
+                      <a href="#">
                         <MenuIcon />
                         <span>Profile Settings</span>
                       </a>

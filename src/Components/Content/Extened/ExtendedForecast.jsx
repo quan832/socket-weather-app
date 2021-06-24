@@ -9,7 +9,7 @@ export default function ExtendedForecast({ match, socket }) {
   const renderDayWeatherItem = () => {
     return weathers.map((item, index) => {
       return (
-        <div 
+        <div
           key={index}
           className="day-wethear-item"
           style={{ borderRight: "1px solid #e6ecf5" }}
@@ -19,16 +19,16 @@ export default function ExtendedForecast({ match, socket }) {
           <div
             style={{ width: "125px", height: "125px", objectFit: "contain" }}
           >
-            <svg
+            <img
               style={{ width: "100%" }}
               src={
                 window.location.origin +
-                `/src/assets/svg-icons/sprites/icons-weather-${item.typeIcon}.png`
+                `/src/assets/img/weather/icon-${item.typeIcon}.png`
               }
             />
           </div>
           <div className="wethear-now">
-            <div className="temperature-sensor">60°</div>
+            <div className="temperature-sensor">{item.avrTemperature}</div>
             <div className="max-min-temperature">
               <span>55°</span>
               <span className="high">69°</span>

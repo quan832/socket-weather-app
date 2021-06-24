@@ -1,8 +1,8 @@
 import React from "react";
 import PlusIcon from "../../assets/svg-icons/plus-icon.svg?component";
 
+
 export default function CreateForecast() {
-  
   return (
     <div className="tab-pane " id="events" role="tabpanel">
       <div className="container">

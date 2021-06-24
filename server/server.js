@@ -79,4 +79,18 @@ io.on("connection", (socket) => {
     });
   })
 
+  socket.on("createCityWeather", async (weather) =>{
+
+    console.log(`A user create new city weather `)
+    
+    // wether
+    const data = await Weather.find({});
+
+    socket.emit("updateCityWeather", {
+      data,
+      userId: socket.userId,
+    });
+  })
+
+
 });

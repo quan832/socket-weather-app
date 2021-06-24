@@ -91,7 +91,11 @@ function App() {
           exact
           render={() => <WatchPage socket={socket} />}
         />
-        <Route path="/admin" exact render={() => <AdminPage />} />
+        <Route
+          path="/admin"
+          exact
+          render={() => <AdminPage socket={socket} />}
+        />
       </Switch>
     </BrowserRouter>
   );

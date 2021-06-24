@@ -1,17 +1,19 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 import moment from "moment";
 import { FORMAT_DATE } from "../../util/appUtil";
+
+import friendHarmonic1 from "../../assets/img/friend-harmonic1.jpg";
+import friendHarmonic5 from "../../assets/img/friend-harmonic5.jpg";
+import friendHarmonic3 from "../../assets/img/friend-harmonic3.jpg";
+import friendHarmonic8 from "../../assets/img/friend-harmonic10.jpg";
+import friendHarmonic2 from "../../assets/img/friend-harmonic2.jpg";
+
 export default function ListForecast() {
   const weathers = useSelector((state) => state.weatherState.weathers);
 
   const renderWeather = () => {
-    if (weathers === null) {
-      weathers = axios.get("http://localhost:8000").then((result) => {
-        return result.data;
-      });
-    }
     return weathers?.map((item, index) => {
       return (
         <tr className="event-item">
@@ -49,32 +51,32 @@ export default function ListForecast() {
             <ul className="friends-harmonic">
               <li>
                 <a href="#">
-                  <img src="img/friend-harmonic5.jpg" alt="friend" />
+                  <img src={friendHarmonic1} alt="friend" />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="img/friend-harmonic10.jpg" alt="friend" />
+                  <img src={friendHarmonic5} alt="friend" />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="img/friend-harmonic7.jpg" alt="friend" />
+                  <img src={friendHarmonic3} alt="friend" />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="img/friend-harmonic8.jpg" alt="friend" />
+                  <img src={friendHarmonic8} alt="friend" />
                 </a>
               </li>
               <li>
                 <a href="#">
-                  <img src="img/friend-harmonic2.jpg" alt="friend" />
+                  <img src={friendHarmonic2} alt="friend" />
                 </a>
               </li>
               <li>
                 <a href="#" className="all-users bg-breez">
-                  +24
+                  +{index + 10}
                 </a>
               </li>
             </ul>

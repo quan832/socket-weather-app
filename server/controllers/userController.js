@@ -35,7 +35,7 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({
     email,
-    password: sha256(password + process.env.SALT),  
+    password: sha256(password + process.env.SALT),
   });
 
   if (!user) throw "Email and Password did not match.";
