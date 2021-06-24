@@ -14,6 +14,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: "Password is required!",
     },
+    type: {
+      type:String,
+      required:"Type user is required!",
+    }
   },
   {
     timestamps: true,

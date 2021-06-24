@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import FindWeather from "../../assets/svg-icons/magnifying-glass-icon.svg?component";
+import makeToast from "../../Toaster";
 import {  FETCH_CITY_WEATHER } from "../../util/appUtil";
 
 
@@ -21,9 +22,12 @@ export default function Header({socket}) {
       socket.emit("getCityWeather",  weather);
 
       socket.on("newCityWeather", ({data,userId}) => {
+          makeToast("success", `Get ${data.cityName} weather forecast!`);
           return dispatch({type: FETCH_CITY_WEATHER ,payload: data})
       }); 
       
+      
+
     }
     
   },[submit])

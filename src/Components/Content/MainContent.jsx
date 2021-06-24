@@ -5,6 +5,7 @@ import ExtendedForecast from "./Extened/ExtendedForecast";
 import Preview from "./Preview/Preview";
 import { APP_TOKEN, FETCH_ALL_WEATHERS } from "../../util/appUtil";
 import { useDispatch, useSelector } from "react-redux";
+import makeToast from "../../Toaster";
 
 export default function MainContent({ socket }) {
 
@@ -13,7 +14,6 @@ export default function MainContent({ socket }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(socket);
     const token = localStorage.getItem(APP_TOKEN);
 
     if (socket && isUpload === true ) {
@@ -22,6 +22,7 @@ export default function MainContent({ socket }) {
 
       socket.on("newAllWeathers", (weather) => {
             dispatch({ type: FETCH_ALL_WEATHERS, payload: weather})
+            makeToast("success", "Get weather forecast!");
       }); 
     }
   }, [ isUpload ]);

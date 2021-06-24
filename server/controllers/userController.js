@@ -4,7 +4,7 @@ const sha256 = require("js-sha256");
 const jwt = require("jwt-then");
 
 exports.register = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, type } = req.body;
 
   const emailRegex = /@gmail.com|@yahoo.com|@hotmail.com|@live.com/;
 
@@ -21,6 +21,7 @@ exports.register = async (req, res) => {
     name,
     email,
     password: sha256(password + process.env.SALT),
+    type,
   });
 
   await user.save();
@@ -34,7 +35,7 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({
     email,
-    password: sha256(password + process.env.SALT),
+    password: sha256(password + process.env.SALT),  
   });
 
   if (!user) throw "Email and Password did not match.";

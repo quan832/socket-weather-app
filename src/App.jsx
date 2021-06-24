@@ -23,6 +23,9 @@ import { APP_TOKEN, defaultCity } from "./util/appUtil";
 // import makeToast
 import makeToast from "./Toaster";
 
+// alert
+// import Swal from "sweetalert2";
+
 export const history = createBrowserHistory();
 
 function App() {
@@ -56,10 +59,13 @@ function App() {
       });
 
       // if connect
-      await newSocket.on("connect", () => {
+       newSocket.on("connect", async () => {
         console.log("connected");
-        makeToast("success", "Socket Connected!");
+
+        makeToast("success", "Socket Disconnected!");
       });
+      
+      console.log(Swal)
 
       setSocket(newSocket);
 
@@ -78,7 +84,7 @@ function App() {
         <Route
           path="/login"
           exact
-          render={() => <LoginPage setupSocket={setupSocket} />}
+          render={() => <LoginPage setupSocket={setupSocket} socket={socket} />}
         />
         <Route
           path="/dashboard"

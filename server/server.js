@@ -75,8 +75,6 @@ io.on("connection", (socket) => {
         }
     });
 
-    console.log(data)
-
     socket.emit("newCityWeather", {
       data,
       userId: socket.userId,
