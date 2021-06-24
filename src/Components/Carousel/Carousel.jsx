@@ -14,10 +14,6 @@ export default function Carousel() {
         <div className="date">Saturday, March 26th</div>
         <div className="place">{cityWeather.cityName}</div>
       </div>
-      <div className="wethear-update">
-        Updated: 20/10 6:32pm
-        <WeatherRefresh />
-      </div>
       <div className="container">
         <div className="row">
           <div className="m-auto col-lg-4 col-md-8 col-sm-12 col-12">

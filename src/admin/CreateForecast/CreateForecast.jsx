@@ -1,4 +1,5 @@
 import React from "react";
+import PlusIcon from "../../assets/svg-icons/plus-icon.svg?component";
 
 export default function CreateForecast() {
   return (
@@ -24,9 +25,7 @@ export default function CreateForecast() {
                       data-toggle="modal"
                       data-target="#create-event"
                     >
-                      <svg className="olymp-plus-icon">
-                        <use xlinkHref="svg-icons/sprites/icons.svg#olymp-plus-icon" />
-                      </svg>
+                      <PlusIcon />
                     </a>
                   </div>
                 </div>

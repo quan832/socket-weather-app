@@ -24,6 +24,7 @@ import { APP_TOKEN, defaultCity } from "./util/appUtil";
 // import makeToast
 import makeToast from "./Toaster";
 
+import "./App.css";
 // alert
 // import Swal from "sweetalert2";
 
@@ -61,7 +62,7 @@ function App() {
       newSocket.on("connect", async () => {
         console.log("connected");
 
-        makeToast("success", "Socket Disconnected!");
+        makeToast("success", "Socket Connected!");
       });
 
       console.log(Swal);

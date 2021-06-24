@@ -2,35 +2,41 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import FindWeather from "../../assets/svg-icons/magnifying-glass-icon.svg?component";
 import makeToast from "../../Toaster";
-import {  FETCH_CITY_WEATHER } from "../../util/appUtil";
+import { FETCH_CITY_WEATHER } from "../../util/appUtil";
 
+import MenuIcon from "../../assets/svg-icons/menu-icon.svg?component";
+import Avatar from "../../assets/img/author-page.jpg";
+import ArrowIcon from "../../assets/svg-icons/dropdown-arrow-icon.svg?component";
+import LogoutIcon from "../../assets/svg-icons/logout-icon.svg?component";
+import StarIcon from "../../assets/svg-icons/star-icon.svg?component";
 
-export default function Header({socket}) {
-
-  const [ citySearch, setCitySearch ] = useState('');
+export default function Header({ socket }) {
+  const [citySearch, setCitySearch] = useState("");
 
   const [submit, setSubmit] = useState(false);
 
-  const dispatch = useDispatch()
-  const cityRef = React.createRef(); 
+  const dispatch = useDispatch();
+  const cityRef = React.createRef();
 
-  useEffect(()=>{
-
+  useEffect(() => {
     if (socket && submit) {
-    
       const weather = cityRef.current.value;
-      socket.emit("getCityWeather",  weather);
+      socket.emit("getCityWeather", weather);
 
-      socket.on("newCityWeather", ({data,userId}) => {
-          makeToast("success", `Get ${data.cityName} weather forecast!`);
-          return dispatch({type: FETCH_CITY_WEATHER ,payload: data})
-      }); 
-      
-      
+      socket.on("newCityWeather", ({ data, userId }) => {
+        console.log(data);
+        if (data === null) {
+          return makeToast("error", `Your city is not match!`);
+        }
+        makeToast("success", `Get ${data.cityName} weather forecast!`);
+        return dispatch({ type: FETCH_CITY_WEATHER, payload: data });
+      });
 
+      socket.on("error", (err) => {
+        makeToast("error", `${err}`);
+      });
     }
-    
-  },[submit])
+  }, [submit]);
 
   return (
     <header className="header" id="site-header">
@@ -46,14 +52,86 @@ export default function Header({socket}) {
               type="text"
               ref={cityRef}
             />
-            <button onClick={(e)=>{
-              e.preventDefault();
-              setSubmit(!submit);
-            }}>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                setSubmit(!submit);
+              }}
+            >
               <FindWeather />
             </button>
           </div>
         </form>
+        <div className="control-block">
+          <div className="author-page author vcard inline-items more">
+            <div className="author-thumb">
+              <img alt="author" src={Avatar} className="avatar" />
+              <span className="icon-status online" />
+              <div className="more-dropdown more-with-triangle">
+                <div className="mCustomScrollbar" data-mcs-theme="dark">
+                  <div className="ui-block-title ui-block-title-small">
+                    <h6 className="title">Your Account</h6>
+                  </div>
+                  <ul className="account-settings">
+                    <li>
+                      <a href="29-YourAccount-AccountSettings.html">
+                        <MenuIcon />
+                        <span>Profile Settings</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <StarIcon />
+                        <span>Return admin page</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <LogoutIcon />
+                        <span>Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                  <div className="ui-block-title ui-block-title-small">
+                    <h6 className="title">Chat Settings</h6>
+                  </div>
+                  <ul className="chat-settings">
+                    <li>
+                      <a href="#">
+                        <span className="icon-status online" />
+                        <span>Online</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span className="icon-status away" />
+                        <span>Away</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span className="icon-status disconected" />
+                        <span>Disconnected</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <span className="icon-status status-invisible" />
+                        <span>Invisible</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <a className="author-name fn">
+              <div className="author-title">
+                Quan Tran <ArrowIcon />
+              </div>
+              <span className="author-subtitle">admin</span>
+            </a>
+          </div>
+        </div>
       </div>
     </header>
   );

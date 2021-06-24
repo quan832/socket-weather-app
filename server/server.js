@@ -54,8 +54,6 @@ io.on("connection", (socket) => {
 
   socket.on("getAllWeather", async ({ token }) => {
     console.log("A user want to get weather: " + socket.userId);
-    
-    console.log(socket)
     // wether
     const data = await Weather.find({});
 
@@ -71,11 +69,10 @@ io.on("connection", (socket) => {
 
     //get city weather 
     const data = await Weather.findOne({cityName: new RegExp('^'+weatherName+'$', "i")}, function(err, doc){
-        if(err) {
-          return err;
-        }
+       return err
     });
 
+    
     socket.emit("newCityWeather", {
       data,
       userId: socket.userId,

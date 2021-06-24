@@ -8,14 +8,14 @@ export const FETCH_ALL_WEATHERS_SUCCESS = "FETCH_ALL_WEATHERS_SUCCESS";
 export const CLICK_BUTTON = "CLICK_BUTTON";
 export const CLICK_BUTTON_SUCCESS = "CLICK_BUTTON_SUCCESS";
 
-export const FETCH_CITY_WEATHER ="FETCH_CITY_WEATHER"
-export const FETCH_CITY_WEATHER_SUCCESS ="FETCH_CITY_WEATHER_SUCCESS"
+export const FETCH_CITY_WEATHER = "FETCH_CITY_WEATHER";
+export const FETCH_CITY_WEATHER_SUCCESS = "FETCH_CITY_WEATHER_SUCCESS";
 
+export const FORMAT_DATE = "ll";
 
 export const weatherOptions = [
   {
     typeIcon: "sunny",
-    
   },
   {
     typeIcon: "rain",
@@ -23,4 +23,4 @@ export const weatherOptions = [
   },
 ];
 
-export const defaultCity = "saigon"
+export const defaultCity = "saigon";

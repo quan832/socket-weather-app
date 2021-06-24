@@ -26,28 +26,21 @@ export default function ModalCreate() {
             <h6 className="title">Create an Event</h6>
           </div>
           <div className="modal-body">
-            <div className="form-group label-floating is-select">
-              <label className="control-label">Personal Event</label>
-              <select className="selectpicker form-control">
-                <option value="MA">Private Event</option>
-                <option value="FE">Personal Event</option>
-              </select>
-            </div>
             <div className="form-group label-floating">
-              <label className="control-label">Event Name</label>
+              <label className="control-label">City Name</label>
               <input
                 className="form-control"
                 placeholder
-                defaultValue="Take Querty to the Veterinarian"
+                defaultValue="Ho Chi Minh City"
                 type="text"
               />
             </div>
-            <div className="form-group label-floating is-empty">
-              <label className="control-label">Event Location</label>
+            <div className="form-group label-floating">
+              <label className="control-label">Average Temperature</label>
               <input
                 className="form-control"
                 placeholder
-                defaultValue
+                defaultValue="Ho Chi Minh City"
                 type="text"
               />
             </div>
@@ -63,7 +56,7 @@ export default function ModalCreate() {
             <div className="row">
               <div className="col col-lg-3 col-md-3 col-sm-12 col-12">
                 <div className="form-group label-floating">
-                  <label className="control-label">Event Time</label>
+                  <label className="control-label">Date Time</label>
                   <input
                     className="form-control"
                     placeholder
@@ -83,16 +76,16 @@ export default function ModalCreate() {
               </div>
               <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
                 <div className="form-group label-floating is-select">
-                  <label className="control-label">Timezone</label>
+                  <label className="control-label">Forecast</label>
                   <select className="selectpicker form-control">
-                    <option value="MA">US (UTC-8)</option>
-                    <option value="FE">UK (UTC-0)</option>
+                    <option value="sunny">Sunny</option>
+                    <option value="rain">Rain </option>
                   </select>
                 </div>
               </div>
             </div>
             <div className="form-group label-floating">
-              <label className="control-label">Event Description</label>
+              <label className="control-label">More Data</label>
               <textarea
                 className="form-control"
                 placeholder
@@ -101,73 +94,6 @@ export default function ModalCreate() {
                 }
               />
             </div>
-            <form className="form-group label-floating is-select">
-              <svg className="olymp-happy-face-icon">
-                <use xlinkHref="svg-icons/sprites/icons.svg#olymp-happy-face-icon" />
-              </svg>
-              <select
-                className="selectpicker form-control style-2 show-tick"
-                multiple
-                data-live-search="true"
-              >
-                <option
-                  title="Green Goo Rock"
-                  data-content='<div class="inline-items">
-                  <div class="author-thumb">
-                    <img src="img/avatar52-sm.jpg" alt="author">
-                  </div>
-                    <div class="h6 author-title">Green Goo Rock</div>
-    
-                  </div>'
-                >
-                  Green Goo Rock
-                </option>
-                <option
-                  title="Mathilda Brinker"
-                  data-content='<div class="inline-items">
-                    <div class="author-thumb">
-                      <img src="img/avatar74-sm.jpg" alt="author">
-                    </div>
-                    <div class="h6 author-title">Mathilda Brinker</div>
-                  </div>'
-                >
-                  Mathilda Brinker
-                </option>
-                <option
-                  title="Marina Valentine"
-                  data-content='<div class="inline-items">
-                    <div class="author-thumb">
-                      <img src="img/avatar48-sm.jpg" alt="author">
-                    </div>
-                    <div class="h6 author-title">Marina Valentine</div>
-                  </div>'
-                >
-                  Marina Valentine
-                </option>
-                <option
-                  title="Dave Marinara"
-                  data-content='<div class="inline-items">
-                    <div class="author-thumb">
-                      <img src="img/avatar75-sm.jpg" alt="author">
-                    </div>
-                    <div class="h6 author-title">Dave Marinara</div>
-                  </div>'
-                >
-                  Dave Marinara
-                </option>
-                <option
-                  title="Rachel Howlett"
-                  data-content='<div class="inline-items">
-                    <div class="author-thumb">
-                      <img src="img/avatar76-sm.jpg" alt="author">
-                    </div>
-                    <div class="h6 author-title">Rachel Howlett</div>
-                  </div>'
-                >
-                  Rachel Howlett
-                </option>
-              </select>
-            </form>
             <button className="btn btn-breez btn-lg full-width">
               Create Event
             </button>

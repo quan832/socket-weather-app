@@ -1,16 +1,22 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { APP_TOKEN, CLICK_BUTTON, FETCH_ALL_WEATHERS } from "../../../util/appUtil";
+import {
+  APP_TOKEN,
+  CLICK_BUTTON,
+  FETCH_ALL_WEATHERS,
+} from "../../../util/appUtil";
+
+import _ from "lodash";
 
 export default function Input({ socket }) {
-
   const dispatch = useDispatch();
 
-  const fetchWeather = () => {
-    // call action
+  const fetchWeather = _.debounce(() => {
     dispatch({ type: CLICK_BUTTON });
-  };
+  }, 450);
+
+  // call action
 
   return (
     <div className="ui-block">
@@ -40,7 +46,7 @@ export default function Input({ socket }) {
             </div>
             <div className="col col-lg-6 col-md-6 col-sm-12 col-12">
               <div className="switcher-block" style={{ marginTop: "15px" }}>
-                <div className="h6 title">Show all City forecast on Widget</div>
+                <div className="h6 title">Show All City forecast on Widget</div>
                 <div className="togglebutton blue">
                   <label>
                     <input type="checkbox" defaultChecked />
@@ -51,8 +57,6 @@ export default function Input({ socket }) {
               <button
                 onClick={(e) => {
                   e.preventDefault();
-                  // fetchWeather();
-                  // setButton(!button);
                   fetchWeather();
                 }}
                 className="btn btn-blue btn-md full-width"
