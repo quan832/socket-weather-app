@@ -5,7 +5,6 @@ import { APP_TOKEN } from "../../util/appUtil";
 import { withRouter } from "react-router-dom";
 
 function Register(props) {
-
   const emailRef = React.createRef();
   const passwordRef = React.createRef();
 
@@ -18,17 +17,17 @@ function Register(props) {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
-    const name = firstNameRef.current.value + ' ' + LastNameRef.current.value;
-    
-    const type = typeRef.current.value
-    
-    console.log(email,password,name,type)
+    const name = firstNameRef.current.value + " " + LastNameRef.current.value;
+
+    const type = typeRef.current.value;
+
+    console.log(email, password, name, type);
     axios
       .post("http://localhost:8000/user/register", {
-        name, 
+        name,
         email,
         password,
-        type
+        type,
       })
       .then((res) => {
         makeToast("success", res.data.message);
@@ -52,27 +51,55 @@ function Register(props) {
           <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
             <div className="form-group label-floating">
               <label className="control-label">First Name</label>
-              <input className="form-control" placeholder type="text"   ref={firstNameRef} />
+              <input
+                className="form-control"
+                placeholder
+                type="text"
+                ref={firstNameRef}
+                style={{ height: "45px" }}
+              />
             </div>
           </div>
           <div className="col col-12 col-xl-6 col-lg-6 col-md-6 col-sm-12">
             <div className="form-group label-floating">
               <label className="control-label">Last Name</label>
-              <input className="form-control" placeholder type="text"   ref={LastNameRef} />
+              <input
+                className="form-control"
+                placeholder
+                type="text"
+                ref={LastNameRef}
+                style={{ height: "45px" }}
+              />
             </div>
           </div>
           <div className="col col-12 col-xl-12 col-lg-12 col-md-12 col-sm-12">
             <div className="form-group label-floating">
               <label className="control-label">Your Email</label>
-              <input className="form-control" placeholder type="email" ref={emailRef} />
+              <input
+                className="form-control"
+                placeholder
+                type="email"
+                ref={emailRef}
+                style={{ height: "45px" }}
+              />
             </div>
             <div className="form-group label-floating">
               <label className="control-label">Your Password</label>
-              <input className="form-control" placeholder type="password" ref={passwordRef} />
+              <input
+                className="form-control"
+                placeholder
+                type="password"
+                ref={passwordRef}
+                style={{ height: "45px" }}
+              />
             </div>
             <div className="form-group label-floating">
               <label className="control-label">Your Type</label>
-              <select className="selectpicker form-control"     ref={typeRef}>
+              <select
+                className="selectpicker form-control"
+                ref={typeRef}
+                style={{ height: "55px" }}
+              >
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
               </select>
@@ -87,12 +114,15 @@ function Register(props) {
                 </label>
               </div>
             </div>
-            <button onClick={(e)=>{
+            <button
+              onClick={(e) => {
+                e.preventDefault();
 
-              e.preventDefault()
-
-              signUpUser()
-            }} href="#" className="btn btn-purple btn-lg full-width">
+                signUpUser();
+              }}
+              href="#"
+              className="btn btn-purple btn-lg full-width"
+            >
               Sign Up
             </button>
           </div>

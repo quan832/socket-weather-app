@@ -65,11 +65,8 @@ function App() {
         makeToast("success", "Socket Connected!");
       });
 
-      console.log(Swal);
-
       setSocket(newSocket);
 
-      console.log(socket);
     }
   };
 

@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import weatherBottom from "../../assets/img/weather-bottom.png";
 import WeatherRefresh from "../../assets/svg-icons/weather-refresh-icon.svg?component";
 import SunnyWeather from "../../assets/svg-icons/sprites/icons-weather-sunny.svg?component";
+import moment from "moment";
+import { FORMAT_DATE, FORMAT_DATE_TIME } from "../../util/appUtil";
 
 export default function Carousel() {
   const cityWeather = useSelector((state) => state.weatherState.cityWeather);
@@ -11,7 +13,9 @@ export default function Carousel() {
     <div className="main-header main-header-weather">
       <div className="content-bg-wrap bg-weather" />
       <div className="date-and-place">
-        <div className="date">Saturday, March 26th</div>
+        <div className="date">
+          {moment.utc(cityWeather.dateTime).format(FORMAT_DATE_TIME)}
+        </div>
         <div className="place">{cityWeather.cityName}</div>
       </div>
       <div className="container">

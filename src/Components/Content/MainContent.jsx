@@ -8,24 +8,22 @@ import { useDispatch, useSelector } from "react-redux";
 import makeToast from "../../Toaster";
 
 export default function MainContent({ socket }) {
-
-  const { isUpload } = useSelector(state=> state.weatherState )
+  const { isUpload } = useSelector((state) => state.weatherState);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem(APP_TOKEN);
 
-    if (socket && isUpload === true ) {
-
+    if (socket && isUpload === true) {
       socket.emit("getAllWeather", { token });
 
       socket.on("newAllWeathers", (weather) => {
-            dispatch({ type: FETCH_ALL_WEATHERS, payload: weather})
-            makeToast("success", "Get weather forecast!");
-      }); 
+        dispatch({ type: FETCH_ALL_WEATHERS, payload: weather });
+        makeToast("success", "Get weather forecast!");
+      });
     }
-  }, [ isUpload ]);
+  }, [isUpload]);
 
   return (
     <Fragment>

@@ -42,8 +42,16 @@ exports.login = async (req, res) => {
 
   const token = await jwt.sign({ id: user.id }, process.env.SECRET);
 
+      //get city weather 
+  const data = await User.findOne({email: new RegExp('^'+email+'$', "i")}, function(err, doc){
+        return err
+  });
+
+  console.log(data);
+
   res.json({
     message: "User logged in successfully!",
     token,
+    type: data.type
   });
 };

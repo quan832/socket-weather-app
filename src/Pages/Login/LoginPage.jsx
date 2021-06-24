@@ -9,15 +9,18 @@ import Register from "../../Components/Register/Register";
 // import styled component
 import { LoginContentStyled } from "../../styleSheet/Login/LoginContent.style";
 import axios from "axios";
-import { APP_TOKEN } from "../../util/appUtil";
+import { APP_TOKEN, LOGIN_NEW_USER } from "../../util/appUtil";
 import { history } from "../../App";
 
 import { withRouter } from "react-router-dom";
 import makeToast from "../../Toaster";
+import { useDispatch } from "react-redux";
 
 function LoginPage(props) {
   const emailRef = React.createRef();
   const passwordRef = React.createRef();
+
+  const dispatch = useDispatch();
 
   const loginUser = () => {
     const email = emailRef.current.value;
@@ -32,6 +35,13 @@ function LoginPage(props) {
         makeToast("success", res.data.message);
         localStorage.setItem(APP_TOKEN, res.data.token);
         props.history.push("/dashboard");
+        dispatch({
+          type: LOGIN_NEW_USER,
+          payload: {
+            token: res.data.token,
+            type: res.data.type,
+          },
+        });
         props.setupSocket();
       })
       .catch((err) => console.log(err));

@@ -23,7 +23,7 @@ export default function ExtendedForecast({ match, socket }) {
               style={{ width: "100%" }}
               src={
                 window.location.origin +
-                `/src/assets/img/weather/icon-${item.typeIcon}.png`
+                `/src/assets/img/icon_weather/${item.typeIcon}.png`
               }
             />
           </div>
