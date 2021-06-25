@@ -3,6 +3,7 @@ const User = mongoose.model("User");
 const sha256 = require("js-sha256");
 const jwt = require("jwt-then");
 
+// listen request HTTP from client 
 exports.register = async (req, res) => {
   const { name, email, password, type } = req.body;
 
@@ -31,8 +32,20 @@ exports.register = async (req, res) => {
   });
 };
 
+/**
+ * 
+ *  { 
+ *    email: "quan",
+ *    password: "123456"
+ * }
+ *  req : request = client send to 
+ *  res : response = sever return back client
+ * 
+ */
 exports.login = async (req, res) => {
   const { email, password } = req.body;
+
+  // database token -> sha256() -> findOne (email,password) => true || false => exist : true; not exist: false
   const user = await User.findOne({
     email,
     password: sha256(password + process.env.SALT),
@@ -40,16 +53,19 @@ exports.login = async (req, res) => {
 
   if (!user) throw "Email and Password did not match.";
 
+  // if login success -> tra token cho ng dung` -> jwt,sha256 thu vien 
   const token = await jwt.sign({ id: user.id }, process.env.SECRET);
 
-      //get city weather 
+  //get user data 
   const data = await User.findOne({email: new RegExp('^'+email+'$', "i")}, function(err, doc){
         return err
   });
 
+  // return json -> message, data
   res.json({
     message: "User logged in successfully!",
     token,
-    type: data.type
+    type: data.type,
+    name: data.name,
   });
 };

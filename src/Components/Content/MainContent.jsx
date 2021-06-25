@@ -28,7 +28,7 @@ export default function MainContent({ socket }) {
       });
     }
     if (isButton === false && socket && isUpload === true) {
-      const defaultName = "saigon";
+      const defaultName = "sai gon city";
 
       socket.emit("getCityWeather", defaultName);
 

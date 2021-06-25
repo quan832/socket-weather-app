@@ -37,9 +37,14 @@ function App() {
   // const SocketContext = React.createContext(setupSocket);
 
   const setupSocket = async () => {
+
+    // watch user isLogin
     const token = localStorage.getItem(APP_TOKEN);
 
+    // user login 
     if (token && !socket) {
+
+      // create new socket and send to server
       const newSocket = io("http://localhost:8000", {
         query: {
           token: localStorage.getItem(APP_TOKEN),
@@ -47,8 +52,6 @@ function App() {
         transports: ["websocket"],
         upgrade: false,
       });
-
-      // newSocket.set("origins", "*");
 
       // if disconnect
       newSocket.on("disconnect", () => {
@@ -75,7 +78,9 @@ function App() {
     }
   };
 
+  
   useEffect(() => {
+    // run setupSocket() when client turn on
     setupSocket();
   }, []);
 

@@ -32,7 +32,6 @@ export default function (state = initialState, action) {
     }
 
     case FETCH_CITY_WEATHER_SUCCESS: {
-      console.log(action.payload);
       return {
         ...state,
         weatherState: {

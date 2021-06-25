@@ -24,7 +24,11 @@ export default function ListForecast({ setupSocket, socket }) {
             <td className="author">
               <div className="event-author inline-items">
                 <div className="author-date">
-                  <a href="#" className="author-name h6">
+                  <a
+                    href="#"
+                    className="author-name h6"
+                    style={{ textTransform: "capitalize" }}
+                  >
                     {item.cityName}
                   </a>{" "}
                 </div>
@@ -46,10 +50,7 @@ export default function ListForecast({ setupSocket, socket }) {
               </div>
             </td>
             <td className="description">
-              <p className="description">
-                Hey! I thought we could all get together and grab something to
-                eat to remember old times!
-              </p>
+              <p className="description">{item.content}</p>
             </td>
             <td className="users">
               <ul className="friends-harmonic">

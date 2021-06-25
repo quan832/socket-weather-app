@@ -45,11 +45,19 @@ const jwt = require("jwt-then");
 const User = mongoose.model("User");
 const Weather = mongoose.model("Weather");
 
+// verify token user, if === -> socket ready to connect
 io.use(async (socket, next) => {
   try {
+    // handshake sever
     const token = socket.handshake.query.token;
+
+    // verify 
     const payload = await jwt.verify(token, process.env.SECRET);
+    
+    // save socket userID
     socket.userId = payload.id;
+
+    // next
     next();
   } catch (err) {
     console.log(err);
@@ -64,7 +72,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("getAllWeather", async ({ token }) => {
-    console.log("A user want to get weather: " + socket.userId);
+    console.log("A user want to get all city weather: " + socket.userId);
     // wether
     const data = await Weather.find({});
 

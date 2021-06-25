@@ -23,18 +23,28 @@ function LoginPage(props) {
   const dispatch = useDispatch();
 
   const loginUser = () => {
+    // get value input
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
 
+    // request HTTP -> post, { email: "", password:  " "}
     axios
       .post("http://localhost:8000/user/login", {
         email,
         password,
       })
+      // if sever return successfully
       .then((res) => {
+        // notifications
         makeToast("success", res.data.message);
+
+        // set token in local storage
         localStorage.setItem(APP_TOKEN, res.data.token);
+
+        // return dashboard pages
         props.history.push("/dashboard");
+
+        // save data in redux
         dispatch({
           type: LOGIN_NEW_USER,
           payload: {
@@ -42,6 +52,8 @@ function LoginPage(props) {
             type: res.data.type,
           },
         });
+
+        // set up socket
         props.setupSocket();
       })
       .catch((err) => {

@@ -18,9 +18,6 @@ const userSchema = new mongoose.Schema(
       type:String,
       required:"Type user is required!",
     },
-    content: {
-      type:String
-    }
   },
   {
     timestamps: true,

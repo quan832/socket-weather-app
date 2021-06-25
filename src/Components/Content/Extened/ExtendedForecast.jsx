@@ -1,7 +1,13 @@
 import moment from "moment";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { APP_TOKEN, FORMAT_TIME, weatherOptions } from "../../../util/appUtil";
+import {
+  APP_TOKEN,
+  FORMAT_DATE_TIME,
+  FORMAT_DATE_TIME2,
+  FORMAT_TIME,
+  weatherOptions,
+} from "../../../util/appUtil";
 
 export default function ExtendedForecast({ match, socket }) {
   // data
@@ -28,7 +34,7 @@ export default function ExtendedForecast({ match, socket }) {
           data-mh="wethear-item"
         >
           <div className="title">
-            {moment.utc(item.cityName).format(FORMAT_TIME)}
+            {moment.utc(item.cityName).format('MMMM D, h:mm A')}
           </div>
           <div
             style={{ width: "125px", height: "125px", objectFit: "contain" }}
