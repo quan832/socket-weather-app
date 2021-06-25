@@ -21,10 +21,22 @@ require("./models/User");
 require("./models/Weather");
 
 const app = require("./app");
+const path = require("path");
+
+// template engine
+const handlebars = require("express-handlebars");
+
+app.engine("hbs", handlebars({ extname: ".hbs" }));
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "\\view"));
 
 const server = app.listen(8000, () => {
   console.log("Server listening on port 8000");
 });
+
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'about.html'))
+})
 
 const io = require("socket.io")(server);
 const jwt = require("jwt-then");
